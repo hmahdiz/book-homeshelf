@@ -1,0 +1,33 @@
+.content-container {
+    padding-left: 90px;
+    padding-right: 90px;
+    /* background-color: #bebbbb; */
+}
+
+.book-item-button-white {
+    border: 1px solid #b3d146;
+    width: 100px;
+    height: 30px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color .3s linear;
+}
+
+.book-item-button-white:hover {
+    background-color: #b3d146;
+}
+
+.book-item-button-dark {
+    border: 1px solid #b3d146;
+    width: 100px;
+    height: 30px;
+    background-color: transparent;
+    color: #000;
+    cursor: pointer;
+    transition: background-color .3s linear;
+}
+
+.book-item-button-dark:hover {
+    background-color: #b3d146;
+}
