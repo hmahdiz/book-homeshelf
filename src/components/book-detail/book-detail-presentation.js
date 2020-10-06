@@ -2,8 +2,7 @@ import React from "react";
 import "./book-detail.css";
 import EditableInput from "../custom-elements/editable-input";
 import * as bookEnums from "../../models/constants/book";
-import EditableSingleSelectionObject from "../custom-elements/editable-single-selection-object.js";
-import SingleSelectionObject from "../custom-elements/single-selection-object";
+import EditableSelection from "../custom-elements/editable-selection.js";
 
 const BookDetailPresentaion = ({
   book,
@@ -14,18 +13,7 @@ const BookDetailPresentaion = ({
   onHandleEditMode,
   onChangeSelection,
 }) => {
-  const {
-    name,
-    bookAuthors,
-    description,
-    price,
-    frontPageImage,
-    publishedDate,
-    edition,
-    bookRangeAge,
-    bookSize,
-    bookType,
-  } = book;
+  const { name, description, price, frontPageImage, publishedDate, edition, bookRangeAge, bookSize, bookType } = book;
 
   return (
     <div className="book-detail-container">
@@ -40,23 +28,20 @@ const BookDetailPresentaion = ({
                 <EditableInput
                   className="book-detail-title"
                   isEditMode={isEditMode}
-                  noNeedLabel
                   name="name"
-                  title="Name"
                   value={name}
                   onChange={onChangeInput}
                 />
-                <EditableSingleSelectionObject
-                  noNeedLabel
+                <EditableSelection
+                  className="book-detail-author"
+                  name="authors"
                   isEditMode={isEditMode}
-                  name="bookAuthors.author"
-                  selectedOption={bookAuthors[0].author}
                   options={authors}
+                  selectedOptions={book.authors}
+                  fieldValue="id"
+                  fieldTextes={["firstName", "lastName"]}
                   onChange={onChangeSelection}
                 />
-                {bookAuthors.map((ba) => (
-                  <div className="book-detail-author">{ba.author.firstName + " " + ba.author.lastName}</div>
-                ))}
               </div>
               <div className="book-detail-info">
                 <div>
@@ -65,7 +50,7 @@ const BookDetailPresentaion = ({
                     isEditMode={isEditMode}
                     type="number"
                     name="price"
-                    title="Price"
+                    label="Price"
                     value={price}
                     onChange={onChangeInput}
                   >
@@ -77,8 +62,8 @@ const BookDetailPresentaion = ({
                       <span>{new Date(publishedDate).toDateString()}</span>
                     </div>
                     <div>
-                      <EditableSingleSelectionObject
-                        title="Type"
+                      <EditableSelection
+                        label="Type"
                         name="bookType"
                         isEditMode={isEditMode}
                         options={bookEnums.Type}
@@ -87,8 +72,8 @@ const BookDetailPresentaion = ({
                       />
                     </div>
                     <div>
-                      <EditableSingleSelectionObject
-                        title="Range Age"
+                      <EditableSelection
+                        label="Range Age"
                         name="bookRangeAge"
                         isEditMode={isEditMode}
                         options={bookEnums.RangeAge}
@@ -97,8 +82,8 @@ const BookDetailPresentaion = ({
                       />
                     </div>
                     <div>
-                      <EditableSingleSelectionObject
-                        title="Size"
+                      <EditableSelection
+                        label="Size"
                         name="bookSize"
                         isEditMode={isEditMode}
                         options={bookEnums.Size}
@@ -108,7 +93,7 @@ const BookDetailPresentaion = ({
                     </div>
                     <div>
                       <EditableInput
-                        title="Edition"
+                        label="Edition"
                         value={edition}
                         isEditMode={isEditMode}
                         type="number"
@@ -141,23 +126,17 @@ const BookDetailPresentaion = ({
               className="book-detail-overview-text"
               isEditMode={isEditMode}
               name="description"
-              title="Description"
+              label="Description"
               value={description}
               onChange={onChangeInput}
             />
           </div>
           <div className="book-detail-section third-section">
             <div className="book-detail-overview-title">About Author</div>
-            {bookAuthors.map((ba) => (
-              <EditableInput
-                key={ba.id}
-                className="book-detail-overview-text"
-                isEditMode={isEditMode}
-                name="description"
-                title="Description"
-                value={ba.author.about}
-                onChange={onChangeInput}
-              />
+            {book.authors.map((a) => (
+              <div key={a.id} className="book-detail-overview-text">
+                {a.about}
+              </div>
             ))}
           </div>
         </div>

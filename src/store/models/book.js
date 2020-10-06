@@ -40,9 +40,9 @@ export async function deleteBook(bookId) {
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case actionTypes.GetAllBooks:
-      return { ...state, all: action.payload.books, error: "" };
+      return { ...state, all: [...action.payload.books], error: "" };
     case actionTypes.GetById:
-      return { ...state, byId: action.payload.book };
+      return { ...state, byId: { ...action.payload.book } };
     case actionTypes.DeleteBook:
       const all = state.all.filter((b) => b.id !== action.payload.bookId);
       return { ...state, all };

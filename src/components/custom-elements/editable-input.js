@@ -1,11 +1,11 @@
 import React from "react";
 import Input from "./input";
 
-const EditableInput = ({ isEditMode, noNeedLabel = false, children, ...props }) => {
+const EditableInput = ({ isEditMode, label, children, ...props }) => {
   const { title, value } = { ...props };
   return (
     <div className={props.className}>
-      {!noNeedLabel ? <label>{title}: </label> : ""}
+      {label ? <label>{label}: </label> : ""}
       {isEditMode ? (
         <Input {...props} />
       ) : (

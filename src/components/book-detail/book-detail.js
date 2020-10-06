@@ -37,11 +37,11 @@ class BookDetail extends React.Component {
 
   handleChangeInput = (e) => {
     this.setState({ book: { ...this.state.book, [e.target.name]: e.target.value } });
-    debugger;
   };
 
   handleSelectionChange = (e) => {
     this.setState({ book: { ...this.state.book, [e.target.name]: e.target.value } });
+    // this.setState({ book: { ...this.state.book, [e.target.name]: e.target.selectedOptions } });
   };
 
   render() {

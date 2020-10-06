@@ -23,18 +23,14 @@ async function getBookById({ id, success }) {
 
 async function updateBook({ book, success }) {
   try {
-    const result = await axios.put(booksUrl, { book });
+    const result = await axios({ method: "put", url: booksUrl, data: book });
     return success(result.data);
   } catch (error) {}
 }
 
 async function deleteBook({ bookId, success, error }) {
   try {
-    await axios({
-      method: "delete",
-      url: booksUrl,
-      data: { bookId },
-    });
+    await axios({ method: "delete", url: booksUrl, data: { bookId } });
     return success();
   } catch (err) {
     return error(err);
