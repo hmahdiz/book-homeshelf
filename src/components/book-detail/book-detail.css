@@ -38,6 +38,13 @@
     height: 290px;
 }
 
+.book-detail-camera {
+    position: absolute;
+    width: 32px;
+    top: 10px;
+    left: 10px;
+}
+
 .book-detail-title {
     font-size: 50px;
     font-weight: bold;

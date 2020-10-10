@@ -4,6 +4,7 @@ const baseUrl = "http://localhost:8000/api/";
 const booksUrl = baseUrl + "books";
 const booksUrlWithParams = baseUrl + "books/";
 const authorsUrl = baseUrl + "authors";
+const frontImageBookUrl = baseUrl + "uploadfile/frontImageBook/";
 
 async function getBooks({ success, error }) {
   try {
@@ -19,6 +20,15 @@ async function getBookById({ id, success }) {
     const result = await axios.get(booksUrlWithParams + id);
     return success(result.data);
   } catch (error) {}
+}
+
+async function saveBook({ book, success, error }) {
+  try {
+    const result = await axios.post(booksUrl, book);
+    return success(result.data);
+  } catch (err) {
+    error(err);
+  }
 }
 
 async function updateBook({ book, success }) {
@@ -46,10 +56,17 @@ async function getAuthors(success, error) {
   }
 }
 
+async function uploadFile({ id, file, success }) {
+  await axios.post(frontImageBookUrl + id, file);
+  return success();
+}
+
 export default {
   getBooks,
   getBookById,
+  saveBook,
   updateBook,
   deleteBook,
   getAuthors,
+  uploadFile,
 };

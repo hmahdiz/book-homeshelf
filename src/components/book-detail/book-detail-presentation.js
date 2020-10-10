@@ -14,14 +14,23 @@ const BookDetailPresentaion = ({
   onChangeSelection,
 }) => {
   const { name, description, price, frontPageImage, publishedDate, edition, bookRangeAge, bookSize, bookType } = book;
-
+  const imageDataSource = frontPageImage
+    ? "data:image/jpg;base64," + frontPageImage.data
+    : require("../../assets/images/book.jpg");
   return (
     <div className="book-detail-container">
       {book && book.id && (
         <div>
-          <img className="book-detail-background-img" src={"data:image/jpg;base64," + frontPageImage.data} />
+          <img className="book-detail-background-img" src={imageDataSource} />
           <div className="book-detail-section first-section">
-            <img className="book-detail-img" src={"data:image/jpg;base64," + frontPageImage.data} />
+            <div style={{ position: "relative" }}>
+              <img className="book-detail-img" src={imageDataSource} />
+              {isEditMode ? (
+                <img className="book-detail-camera" src={require("../../assets/images/camera-icon.png")} />
+              ) : (
+                ""
+              )}
+            </div>
 
             <div className="book-detail-content">
               <div>
@@ -105,15 +114,15 @@ const BookDetailPresentaion = ({
                 </div>
                 {isEditMode ? (
                   <React.Fragment>
-                    <button className="book-item-button-dark" onClick={onHandleSave}>
+                    <button className="button button-transparent-dark" onClick={onHandleSave}>
                       Save
                     </button>
-                    <button className="book-item-button-dark" onClick={() => onHandleEditMode(false)}>
+                    <button className="button button-transparent-dark" onClick={() => onHandleEditMode(false)}>
                       Cancel
                     </button>
                   </React.Fragment>
                 ) : (
-                  <button className="book-item-button-dark" onClick={() => onHandleEditMode(true)}>
+                  <button className="button button-transparent-dark" onClick={() => onHandleEditMode(true)}>
                     Edit
                   </button>
                 )}

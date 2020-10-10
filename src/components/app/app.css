@@ -4,30 +4,107 @@
     /* background-color: #bebbbb; */
 }
 
-.book-item-button-white {
-    border: 1px solid #b3d146;
+button {
+    border: 1px solid;
     width: 100px;
     height: 30px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color .3s linear;
+}
+
+input[type=text], input[type=number] {
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    color: #b2d237;
+    outline: none;
+    width: 100% !important;
+    height: 39px;
+    padding: 0;
+}
+
+label {
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px 5px;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    /* max-width: 500px; */
+}
+
+select {
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    color: #b2d237;
+    outline: none;
+    height: 39px;
+    padding: 0;
+    width: 100%;
+}
+
+label {
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px 5px;
+}
+
+textarea {
+    background: rgba(255, 255, 255, .18);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    color: #b2d237;
+    outline: none;
+    width: 100% !important;
+    height: 39px;
+    padding: 0;
+    overflow: auto;
+}
+
+.button-transparent-white {
+    border-color: #b3d146;
     background-color: transparent;
     color: #fff;
-    cursor: pointer;
-    transition: background-color .3s linear;
 }
 
-.book-item-button-white:hover {
+.button-transparent-white:hover {
     background-color: #b3d146;
 }
 
-.book-item-button-dark {
-    border: 1px solid #b3d146;
-    width: 100px;
-    height: 30px;
+.button-transparent-dark {
+    border-color: #b3d146;
     background-color: transparent;
     color: #000;
-    cursor: pointer;
-    transition: background-color .3s linear;
 }
 
-.book-item-button-dark:hover {
+.button-transparent-dark:hover {
     background-color: #b3d146;
+}
+
+.button-green {
+    border-color: #ffffff;
+    background-color: #b3d146;
+    color: #fff;
+}
+
+.button-green:hover {
+    background: #2f2f35;
+}
+
+.input-half {
+    width: 50%;
+    float: left;
+}
+
+.field {
+    margin: 0px 0px 20px;
+    position: relative;
 }
