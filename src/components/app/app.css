@@ -1,3 +1,7 @@
+body {
+    font-family: proxima_nova_rgbold;
+}
+
 .content-container {
     padding-left: 90px;
     padding-right: 90px;
@@ -13,7 +17,11 @@ button {
     transition: background-color .3s linear;
 }
 
-input[type=text], input[type=number] {
+form {
+    width: 100%;
+}
+
+input[type=text], input[type=number], input[type=date] {
     background: rgba(255, 255, 255, .18);
     border: 1px solid transparent;
     border-radius: 0px;

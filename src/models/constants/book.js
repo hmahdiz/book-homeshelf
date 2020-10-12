@@ -1,30 +1,30 @@
 const RangeAge = {
-  Kid: 0,
-  Child: 1,
-  Teenager: 2,
-  Mature: 3,
+  Kid: 1,
+  Child: 2,
+  Teenager: 3,
+  Mature: 4,
 };
 
 const Size = {
-  A4: 0,
-  A5: 1,
-  Small: 2,
-  Big: 3,
-  Medium: 4,
+  A4: 1,
+  A5: 2,
+  Small: 3,
+  Big: 4,
+  Medium: 5,
 };
 
 const Subject = {
-  Fiction: 0,
-  Psychology: 1,
-  Politic: 2,
-  History: 3,
-  Kid: 4,
-  Teenager: 5,
+  Fiction: 1,
+  Psychology: 2,
+  Politic: 3,
+  History: 4,
+  Kid: 5,
+  Teenager: 6,
 };
 
 const Type = {
-  PDF: 0,
-  Book: 1,
+  PDF: 1,
+  Book: 2,
 };
 
 export { RangeAge, Size, Subject, Type };

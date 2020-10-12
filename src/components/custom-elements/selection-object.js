@@ -4,11 +4,11 @@ const SelectionObject = ({ name, options, selectedOption, onChange, defaultOptio
   return (
     <React.Fragment>
       <select value={selectedOption} onChange={onChange} name={name}>
-        {defaultOption ? <option>Please Select</option> : ""}
-        {Object.values(options).map((o) => {
+        {defaultOption ? <option value="0">Please Select</option> : ""}
+        {Object.values(options).map((o, index) => {
           return (
             <option key={o} value={o}>
-              {Object.keys(options)[o]}
+              {Object.keys(options)[index]}
             </option>
           );
         })}

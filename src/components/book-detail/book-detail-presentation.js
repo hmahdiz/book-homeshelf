@@ -3,151 +3,143 @@ import "./book-detail.css";
 import EditableInput from "../custom-elements/editable-input";
 import * as bookEnums from "../../models/constants/book";
 import EditableSelection from "../custom-elements/editable-selection.js";
+import NewBookForm from "../add-book/new-book-form";
+import FileUpload from "../custom-elements/file-upload";
 
 const BookDetailPresentaion = ({
   book,
-  authors,
+  allAuthors,
   isEditMode,
   onChangeInput,
   onHandleSave,
   onHandleEditMode,
   onChangeSelection,
 }) => {
-  const { name, description, price, frontPageImage, publishedDate, edition, bookRangeAge, bookSize, bookType } = book;
-  const imageDataSource = frontPageImage
-    ? "data:image/jpg;base64," + frontPageImage.data
+  const imageDataSource = book.frontPageImage
+    ? "data:image/jpg;base64," + book.frontPageImage.data
     : require("../../assets/images/book.jpg");
   return (
     <div className="book-detail-container">
       {book && book.id && (
         <div>
           <img className="book-detail-background-img" src={imageDataSource} />
-          <div className="book-detail-section first-section">
-            <div style={{ position: "relative" }}>
+          <div className="book-detail-section first-section ">
+            <div style={{ position: "relative", marginRight: "10px" }}>
               <img className="book-detail-img" src={imageDataSource} />
+
               {isEditMode ? (
-                <img className="book-detail-camera" src={require("../../assets/images/camera-icon.png")} />
+                // <img className="book-detail-camera" src={require("../../assets/images/camera-icon.png")} />
+                <FileUpload name="frontPageImage" id={book.id} />
               ) : (
                 ""
               )}
             </div>
-
-            <div className="book-detail-content">
-              <div>
-                <EditableInput
-                  className="book-detail-title"
-                  isEditMode={isEditMode}
-                  name="name"
-                  value={name}
-                  onChange={onChangeInput}
-                />
+            {!isEditMode ? (
+              <div className="book-detail-content">
+                <div className="book-detail-title">{book.name}</div>
                 <EditableSelection
                   className="book-detail-author"
                   name="authors"
-                  isEditMode={isEditMode}
-                  options={authors}
+                  label="Author(s)"
+                  options={allAuthors}
                   selectedOptions={book.authors}
                   fieldValue="id"
                   fieldTextes={["firstName", "lastName"]}
-                  onChange={onChangeSelection}
+                />
+                <div className="book-detail-info">
+                  <div className="book-detail-price">{book.price}$</div>
+                  <div className="book-detail-price">{book.publishedDate}</div>
+                  <div className="book-detail-selection">
+                    <EditableSelection
+                      className="book-detail-other"
+                      label="Type"
+                      name="bookType"
+                      options={bookEnums.Type}
+                      selectedOption={book.bookType}
+                    />
+                    <EditableSelection
+                      className="book-detail-other"
+                      label="Range Age"
+                      name="bookRangeAge"
+                      options={bookEnums.RangeAge}
+                      selectedOption={book.bookRangeAge}
+                    />
+                    <EditableSelection
+                      className="book-detail-other"
+                      label="Subject"
+                      name="bookSubject"
+                      options={bookEnums.Subject}
+                      selectedOption={book.bookSubject}
+                    />
+                    <EditableSelection
+                      className="book-detail-other"
+                      label="Size"
+                      name="bookSize"
+                      options={bookEnums.Size}
+                      selectedOption={book.bookSize}
+                    />
+                    <div className="book-detail-other">{book.edition}</div>
+                  </div>
+                  {isEditMode ? (
+                    <React.Fragment>
+                      <button className="button button-transparent-dark" onClick={onHandleSave}>
+                        Save
+                      </button>
+                      <button className="button button-transparent-dark" onClick={() => onHandleEditMode(false)}>
+                        Cancel
+                      </button>
+                    </React.Fragment>
+                  ) : (
+                    <button className="button button-transparent-white" onClick={() => onHandleEditMode(true)}>
+                      Edit
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="book-detail-content">
+                <NewBookForm
+                  {...book}
+                  allAuthors={allAuthors}
+                  onChange={onChangeInput}
+                  onChangeSelectionList={onChangeSelection}
+                />
+                <div>
+                  <button className="button button-transparent-white" onClick={onHandleSave}>
+                    Save
+                  </button>
+                  <button className="button button-transparent-white" onClick={() => onHandleEditMode(false)}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          {!isEditMode ? (
+            <React.Fragment>
+              <div className="book-detail-section second-section">
+                <div className="book-detail-overview-title">About Book</div>
+                <EditableInput
+                  className="book-detail-overview-text"
+                  isEditMode={isEditMode}
+                  name="description"
+                  label="Description"
+                  value={book.description}
+                  onChange={onChangeInput}
                 />
               </div>
-              <div className="book-detail-info">
-                <div>
-                  <EditableInput
-                    className="book-detail-price"
-                    isEditMode={isEditMode}
-                    type="number"
-                    name="price"
-                    label="Price"
-                    value={price}
-                    onChange={onChangeInput}
-                  >
-                    $
-                  </EditableInput>
-                  <div>
-                    <div>
-                      <label>Publish Date: </label>
-                      <span>{new Date(publishedDate).toDateString()}</span>
-                    </div>
-                    <div>
-                      <EditableSelection
-                        label="Type"
-                        name="bookType"
-                        isEditMode={isEditMode}
-                        options={bookEnums.Type}
-                        selectedOption={bookType}
-                        onChange={onChangeSelection}
-                      />
-                    </div>
-                    <div>
-                      <EditableSelection
-                        label="Range Age"
-                        name="bookRangeAge"
-                        isEditMode={isEditMode}
-                        options={bookEnums.RangeAge}
-                        selectedOption={bookRangeAge}
-                        onChange={onChangeSelection}
-                      />
-                    </div>
-                    <div>
-                      <EditableSelection
-                        label="Size"
-                        name="bookSize"
-                        isEditMode={isEditMode}
-                        options={bookEnums.Size}
-                        selectedOption={bookSize}
-                        onChange={onChangeSelection}
-                      />
-                    </div>
-                    <div>
-                      <EditableInput
-                        label="Edition"
-                        value={edition}
-                        isEditMode={isEditMode}
-                        type="number"
-                        name="edition"
-                        onChange={onChangeInput}
-                      />
-                    </div>
+              <div className="book-detail-section third-section">
+                <div className="book-detail-overview-title">About Author</div>
+                {book.authors.map((a) => (
+                  <div key={a.id} className="book-detail-overview-text">
+                    {a.about}
                   </div>
-                </div>
-                {isEditMode ? (
-                  <React.Fragment>
-                    <button className="button button-transparent-dark" onClick={onHandleSave}>
-                      Save
-                    </button>
-                    <button className="button button-transparent-dark" onClick={() => onHandleEditMode(false)}>
-                      Cancel
-                    </button>
-                  </React.Fragment>
-                ) : (
-                  <button className="button button-transparent-dark" onClick={() => onHandleEditMode(true)}>
-                    Edit
-                  </button>
-                )}
+                ))}
               </div>
-            </div>
-          </div>
-          <div className="book-detail-section second-section">
-            <div className="book-detail-overview-title">About Book</div>
-            <EditableInput
-              className="book-detail-overview-text"
-              isEditMode={isEditMode}
-              name="description"
-              label="Description"
-              value={description}
-              onChange={onChangeInput}
-            />
-          </div>
-          <div className="book-detail-section third-section">
-            <div className="book-detail-overview-title">About Author</div>
-            {book.authors.map((a) => (
-              <div key={a.id} className="book-detail-overview-text">
-                {a.about}
-              </div>
-            ))}
-          </div>
+            </React.Fragment>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>

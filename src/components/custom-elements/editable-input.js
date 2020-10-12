@@ -4,10 +4,14 @@ import Input from "./input";
 const EditableInput = ({ isEditMode, label, children, ...props }) => {
   const { title, value } = { ...props };
   return (
-    <div className={props.className}>
-      {label ? <label>{label}: </label> : ""}
+    <div className={"field " + props.className}>
       {isEditMode ? (
-        <Input {...props} />
+        <React.Fragment>
+          <label>{label} </label>
+          <div className="input">
+            <Input className="input" {...props} />
+          </div>
+        </React.Fragment>
       ) : (
         <span>
           {value} {children}

@@ -1,13 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import Modal from "../custom-elements/modal/modal";
-import Input from "../custom-elements/input";
-import SelectionObject from "../custom-elements/selection-object";
-import SelectionList from "../custom-elements/selection-list";
 import { getAll } from "../../store/models/author";
 import { save } from "../../store/models/book";
-import * as bookEnums from "../../models/constants/book";
 import FileUpload from "../custom-elements/file-upload";
+import NewBookForm from "./new-book-form";
 
 class AddBook extends React.Component {
   constructor(props) {
@@ -15,22 +12,17 @@ class AddBook extends React.Component {
 
     this.state = {
       book: {},
-      authors: [],
+      allAuthors: [],
     };
   }
 
   async componentWillMount() {
     await this.props.getAuthors();
-    this.setState({ ...this.state, authors: [...this.props.authors] });
+    this.setState({ ...this.state, allAuthors: [...this.props.authors] });
   }
 
-  onChange = (e, newValue) => {
-    const value = newValue ? newValue : e.target.value;
-    this.setState({ ...this.state, book: { ...this.state.book, [e.target.name]: value } });
-  };
-
-  onChangeSelection = (e) => {
-    // this.setState({...state, book:{...state.book, [e.]}})
+  onChange = (e) => {
+    this.setState({ ...this.state, book: { ...this.state.book, [e.target.name]: e.target.value } });
   };
 
   onChangeSelectionList = (e) => {
@@ -48,107 +40,12 @@ class AddBook extends React.Component {
   };
 
   render() {
-    const { name, price, edition, description, overview, id } = this.state.book;
+    const { id } = this.state.book;
     const buttonName = id ? "Done" : "Save";
     return (
       <Modal title="Add Book" onClose={this.props.onClose} onSave={this.handleSave} buttonName={buttonName}>
         {!id ? (
-          <form>
-            <fieldset>
-              <div className="field">
-                <label>Name </label>
-                <div className="input">
-                  <Input name="name" value={name} onChange={this.onChange} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="input-half field">
-                <label>Price: </label>
-                <div className="input">
-                  <Input name="price" value={price} type="number" onChange={this.onChange} />
-                </div>
-              </div>
-              <div className="input-half field">
-                <label>Edition: </label>
-                <div className="input">
-                  <Input name="edition" type="number" value={edition} onChange={this.onChange} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="field">
-                <label>Publish Date: </label>
-                <div className="input">
-                  <input />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="input-half field">
-                <label>Author(s): </label>
-                <div className="input">
-                  <SelectionList
-                    className="multi-selection"
-                    options={this.state.authors}
-                    fieldValue="id"
-                    fieldTextes={["firstName", "lastName"]}
-                    onChange={this.onChangeSelectionList}
-                  />
-                </div>
-              </div>
-              <div className="input-half field selections">
-                <div>
-                  <label>Type: </label>
-                  <div className="input">
-                    <SelectionObject name="bookType" options={bookEnums.Type} onChange={this.onChange} defaultOption />
-                  </div>
-                </div>
-                <div>
-                  <label>Range Age: </label>
-                  <div className="input">
-                    <SelectionObject
-                      name="bookRangeAge"
-                      options={bookEnums.RangeAge}
-                      onChange={this.onChange}
-                      defaultOption
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label>Subject: </label>
-                  <div className="input">
-                    <SelectionObject
-                      name="subject"
-                      options={bookEnums.Subject}
-                      onChange={this.onChange}
-                      defaultOption
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label>Size: </label>
-                  <div className="input">
-                    <SelectionObject name="bookSize" options={bookEnums.Size} onChange={this.onChange} defaultOption />
-                  </div>
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="field">
-                <label>Overview: </label>
-                <div>
-                  <textarea className="description" name="overview" value={overview} onChange={this.onChange} />
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="field">
-                <label>Description: </label>
-                <textarea className="description" name="description" value={description} onChange={this.onChange} />
-              </div>
-            </fieldset>
-          </form>
+          <NewBookForm {...this.state} onChange={this.onChange} onChangeSelectionList={this.onChangeSelectionList} />
         ) : (
           <div>
             <div className="field">

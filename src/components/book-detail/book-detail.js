@@ -11,7 +11,7 @@ class BookDetail extends React.Component {
     this.state = {
       isEditMode: false,
       book: {},
-      authors: [],
+      allAuthors: [],
     };
   }
 
@@ -23,25 +23,28 @@ class BookDetail extends React.Component {
   toggleEditMode = async (editMode) => {
     if (editMode) {
       await this.props.getAuthors();
-      this.setState({ authors: this.props.authors });
+      this.setState({ allAuthors: this.props.authors });
     } else {
       this.setState({ book: { ...this.props.book } });
     }
     this.setState({ isEditMode: editMode });
   };
 
-  handleSave = async () => {
-    await this.props.update(this.state.book);
-    this.setState({ isEditMode: false });
-  };
-
   handleChangeInput = (e) => {
-    this.setState({ book: { ...this.state.book, [e.target.name]: e.target.value } });
+    this.setState({ ...this.state, book: { ...this.state.book, [e.target.name]: e.target.value } });
   };
 
   handleSelectionChange = (e) => {
-    this.setState({ book: { ...this.state.book, [e.target.name]: e.target.value } });
-    // this.setState({ book: { ...this.state.book, [e.target.name]: e.target.selectedOptions } });
+    const selectedOptions = Array.from(e.target.selectedOptions, (so) => so.value);
+    const selectedAuthors = selectedOptions.map((so) => ({
+      id: so,
+    }));
+    this.setState({ ...this.state, book: { ...this.state.book, authors: [...selectedAuthors] } });
+  };
+
+  handleSave = async () => {
+    await this.props.update(this.state.book);
+    this.setState({ isEditMode: false, book: { ...this.props.book } });
   };
 
   render() {

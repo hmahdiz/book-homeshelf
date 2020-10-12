@@ -3,22 +3,23 @@ import SelectionObject from "./selection-object";
 import SelectionList from "./selection-list";
 
 const EditableSelection = ({ isEditMode, label, children, ...props }) => {
-  const { options, selectedOption, selectedOptions, fieldTextes } = props;
+  const { options, selectedOption, selectedOptions, fieldTextes, className } = props;
   return (
-    <div>
-      {label ? <label>{label}: </label> : ""}
-
-      {options instanceof Array ? (
-        isEditMode ? (
-          <SelectionList {...props} />
+    <div className={className}>
+      {isEditMode ? <label>{label} </label> : ""}
+      <div className="input">
+        {options instanceof Array ? (
+          isEditMode ? (
+            <SelectionList {...props} />
+          ) : (
+            selectedOptions.map((so) => <span key={so.id}>{fieldTextes.map((t) => so[t] + " ")},</span>)
+          )
+        ) : isEditMode ? (
+          <SelectionObject {...props} />
         ) : (
-          fieldTextes.map((t) => selectedOptions.map((so) => so[t]))
-        )
-      ) : isEditMode ? (
-        <SelectionObject {...props} />
-      ) : (
-        Object.keys(options)[selectedOption]
-      )}
+          Object.keys(options)[selectedOption]
+        )}
+      </div>
     </div>
   );
 };
