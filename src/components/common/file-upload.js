@@ -1,6 +1,6 @@
 import React from "react";
-import { uploadFile } from "../../store/models/file";
-import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import "./file-upload.css";
 
 class FileUpload extends React.Component {
   constructor(props) {
@@ -19,23 +19,26 @@ class FileUpload extends React.Component {
     this.setState({ formData });
   };
 
-  onUploadClick = async () => {
-    await this.props.uploadFile(this.props.id, this.state.formData);
+  handleUploadFile = (e) => {
+    this.props.onUploadFile(e, this.state.formData);
   };
 
   render() {
     const { name } = this.props;
     return (
       <React.Fragment>
-        <input type="file" name={name} onChange={this.handleSelectFile} />
-        <button onClick={this.onUploadClick}>Upload</button>
+        <input type="file" className="file" name={name} onChange={this.handleSelectFile} />
+        <button onClick={this.handleUploadFile} className="file-upload-button">
+          Upload
+        </button>
       </React.Fragment>
     );
   }
 }
 
-const mapStateToDispatch = (dispatch) => ({
-  uploadFile: async (id, file) => dispatch(await uploadFile(id, file)),
-});
+FileUpload.propTypes = {
+  name: PropTypes.string.isRequired,
+  onUploadFile: PropTypes.func.isRequired,
+};
 
-export default connect(null, mapStateToDispatch)(FileUpload);
+export default FileUpload;

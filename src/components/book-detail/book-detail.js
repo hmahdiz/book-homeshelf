@@ -16,25 +16,25 @@ class BookDetail extends React.Component {
   }
 
   async componentWillMount() {
+    await this.props.getAuthors();
+    this.setState({ allAuthors: this.props.authors });
+
     await this.props.getById(this.props.match.params.id);
     this.setState({ book: { ...this.props.book } });
   }
 
-  toggleEditMode = async (editMode) => {
-    if (editMode) {
-      await this.props.getAuthors();
-      this.setState({ allAuthors: this.props.authors });
-    } else {
+  toggleEditMode = (editMode) => {
+    if (!editMode) {
       this.setState({ book: { ...this.props.book } });
     }
     this.setState({ isEditMode: editMode });
   };
 
-  handleChangeInput = (e) => {
+  handleChangeField = (e) => {
     this.setState({ ...this.state, book: { ...this.state.book, [e.target.name]: e.target.value } });
   };
 
-  handleSelectionChange = (e) => {
+  handleChangeList = (e) => {
     const selectedOptions = Array.from(e.target.selectedOptions, (so) => so.value);
     const selectedAuthors = selectedOptions.map((so) => ({
       id: so,
@@ -50,11 +50,11 @@ class BookDetail extends React.Component {
   render() {
     return (
       <BookDetailPresentaion
-        {...this.state}
-        onChangeInput={this.handleChangeInput}
-        onHandleSave={this.handleSave}
-        onHandleEditMode={this.toggleEditMode}
-        onChangeSelection={this.handleSelectionChange}
+        data={this.state}
+        onChangeField={this.handleChangeField}
+        onChangeList={this.handleChangeList}
+        onToggleEditMode={this.toggleEditMode}
+        onSaveClick={this.handleSave}
       ></BookDetailPresentaion>
     );
   }

@@ -1,17 +1,14 @@
 import React from "react";
-import Input from "./input";
+import { PropTypes } from "prop-types";
 
-const EditableInput = ({ isEditMode = true, label, children, ...props }) => {
-  const { value } = { ...props };
+const EditableField = ({ name, value, label, type, isEditMode, className, children, onChange }) => {
   return (
-    <div className={"field " + props.className}>
+    <div className={"field " + className}>
+      <label>{label} </label>
       {isEditMode ? (
-        <React.Fragment>
-          <label>{label} </label>
-          <div className="input">
-            <Input className="input" {...props} />
-          </div>
-        </React.Fragment>
+        <div className="input">
+          <input type={type} value={value} name={name} onChange={onChange} />
+        </div>
       ) : (
         <span>
           {value} {children}
@@ -21,4 +18,19 @@ const EditableInput = ({ isEditMode = true, label, children, ...props }) => {
   );
 };
 
-export default EditableInput;
+EditableField.defaultProps = {
+  isEditMode: true,
+  type: "text",
+};
+
+EditableField.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.any,
+  label: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  isEitMode: PropTypes.bool,
+  className: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
+
+export default EditableField;

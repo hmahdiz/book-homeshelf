@@ -5,7 +5,7 @@ import "./navbar.css";
 
 const Navbar = ({ user, onSignOut }) => (
   <div className="navbar">
-    <div className="navbar-top">Welcom to your library</div>
+    {/* <div className="navbar-top">Welcom to your library</div> */}
     <div className="navbar-bottom">
       <Link to="/home" className="navbar-brand">
         Home Bookshelf

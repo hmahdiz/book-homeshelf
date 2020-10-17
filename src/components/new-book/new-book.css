@@ -3,6 +3,11 @@
     padding: 6px 21px 6px 21px;
 }
 
+.new-book-title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .new-book-title-bar {
     color: #b2d237;
     font-family: proxima_nova_rgbold;
@@ -25,6 +30,7 @@
 .new-book-button-container {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .multi-selection {

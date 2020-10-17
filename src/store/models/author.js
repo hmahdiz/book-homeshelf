@@ -16,6 +16,10 @@ export default function reducer(state = {}, action) {
   switch (action.type) {
     case actionTypes.GetAll:
       return { ...state, all: action.payload.authors, error: "" };
+
+    case actionTypes.Error:
+      return { all: [], error: action.payload.error };
+
     default:
       return state;
   }
