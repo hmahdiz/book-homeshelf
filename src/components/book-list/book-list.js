@@ -3,22 +3,14 @@ import { connect } from "react-redux";
 import BookItem from "./book-item";
 import { getAll, deleteBook } from "../../store/models/book";
 import "./book-list.css";
-import AddBook from "../add-book/add-book";
 
 class BookList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpenAddModal: false,
-    };
-  }
   async componentWillMount() {
     await this.props.getAllBooks();
   }
 
-  handleToggleAddModal = (isOpen) => {
-    this.setState({ isOpenAddModal: isOpen });
+  handleAddingBook = () => {
+    this.props.history.push("/books/new");
   };
 
   handleDelete = async (bookId) => {
@@ -43,7 +35,7 @@ class BookList extends React.Component {
             <img
               className="book-item-add-img"
               src={require("../../assets/images/add.png")}
-              onClick={() => this.handleToggleAddModal(true)}
+              onClick={() => this.handleAddingBook()}
             />
           </li>
           {this.props.books &&
@@ -59,7 +51,6 @@ class BookList extends React.Component {
               </li>
             ))}
         </ul>
-        {this.state.isOpenAddModal ? <AddBook onClose={() => this.handleToggleAddModal(false)}></AddBook> : ""}
       </div>
     );
   }

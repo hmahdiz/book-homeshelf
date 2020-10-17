@@ -15,13 +15,12 @@ class FileUpload extends React.Component {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("id", this.props.id);
 
     this.setState({ formData });
   };
 
   onUploadClick = async () => {
-    await this.props.uploadFile(this.state.formData);
+    await this.props.uploadFile(this.props.id, this.state.formData);
   };
 
   render() {
@@ -36,7 +35,7 @@ class FileUpload extends React.Component {
 }
 
 const mapStateToDispatch = (dispatch) => ({
-  uploadFile: async (file) => dispatch(await uploadFile(file)),
+  uploadFile: async (id, file) => dispatch(await uploadFile(id, file)),
 });
 
 export default connect(null, mapStateToDispatch)(FileUpload);

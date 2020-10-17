@@ -1,8 +1,8 @@
 import React from "react";
 import Input from "./input";
 
-const EditableInput = ({ isEditMode, label, children, ...props }) => {
-  const { title, value } = { ...props };
+const EditableInput = ({ isEditMode = true, label, children, ...props }) => {
+  const { value } = { ...props };
   return (
     <div className={"field " + props.className}>
       {isEditMode ? (

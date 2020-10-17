@@ -2,7 +2,7 @@ import React from "react";
 import SelectionObject from "./selection-object";
 import SelectionList from "./selection-list";
 
-const EditableSelection = ({ isEditMode, label, children, ...props }) => {
+const EditableSelection = ({ isEditMode = true, label, children, ...props }) => {
   const { options, selectedOption, selectedOptions, fieldTextes, className } = props;
   return (
     <div className={className}>

@@ -1,4 +1,4 @@
-import apiCall from "../api/apiCall";
+import bookService from "../../services/bookService";
 
 const actionTypes = {
   GetAllBooks: "GET_ALL_BOOKS",
@@ -10,45 +10,45 @@ const actionTypes = {
 };
 
 export async function getAll() {
-  return await apiCall.getBooks({
-    success: (books) => ({ type: actionTypes.GetAllBooks, payload: { books } }),
-    error: (err) => ({ type: actionTypes.Error, payload: err }),
-  });
+  return await bookService.getAll(
+    (books) => ({ type: actionTypes.GetAllBooks, payload: { books } }),
+    (err) => ({ type: actionTypes.Error, payload: err })
+  );
 }
 
 export async function getById(id) {
-  return await apiCall.getBookById({
+  return await bookService.getById(
     id,
-    success: (book) => ({ type: actionTypes.GetById, payload: { book } }),
-    error: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
-  });
+    (book) => ({ type: actionTypes.GetById, payload: { book } }),
+    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
+  );
 }
 
 export async function save(book) {
-  return await apiCall.saveBook({
+  return await bookService.save(
     book,
-    success: (savedBook) => ({ type: actionTypes.AddBook, payload: { savedBook } }),
-    error: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
-  });
+    (savedBook) => ({ type: actionTypes.AddBook, payload: { savedBook } }),
+    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
+  );
 }
 
 export async function update(book) {
-  return await apiCall.updateBook({
+  return await bookService.update(
     book,
-    success: (book) => ({ type: actionTypes.GetById, payload: { book } }),
-    error: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
-  });
+    (book) => ({ type: actionTypes.GetById, payload: { book } }),
+    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
+  );
 }
 
 export async function deleteBook(bookId) {
-  return await apiCall.deleteBook({
+  return await bookService.delete(
     bookId,
-    success: () => ({ type: actionTypes.DeleteBook, payload: { bookId } }),
-    error: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
-  });
+    () => ({ type: actionTypes.DeleteBook, payload: { bookId } }),
+    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
+  );
 }
 
-export default function reducer(state = {}, action) {
+export default function reducer(state = { all: [] }, action) {
   switch (action.type) {
     case actionTypes.GetAllBooks:
       return { ...state, all: [...action.payload.books], error: "" };

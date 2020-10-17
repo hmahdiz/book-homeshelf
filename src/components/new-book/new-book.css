@@ -1,0 +1,50 @@
+.new-book-container {
+    background-color: #0b0b0be8;
+    padding: 6px 21px 6px 21px;
+}
+
+.new-book-title-bar {
+    color: #b2d237;
+    font-family: proxima_nova_rgbold;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.new-book-content {
+    padding: 0 21px 0 21px;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    overflow: auto;
+}
+
+.new-book-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.multi-selection {
+    width: 100%;
+    height: 235px;
+    padding: 0;
+    margin-right: 8px;
+}
+
+.selections {
+    display: flex;
+    flex-flow: column;
+}
+
+.description {
+    height: 100px;
+    overflow: auto;
+    margin-right: 8px;
+}
+
+.input {
+    margin-right: 8px;
+}

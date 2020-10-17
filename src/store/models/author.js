@@ -1,4 +1,4 @@
-import apiCall from "../api/apiCall";
+import authorService from "../../services/authorService";
 
 const actionTypes = {
   GetAll: "GET_ALL",
@@ -6,13 +6,13 @@ const actionTypes = {
 };
 
 export function getAll() {
-  return apiCall.getAuthors(
+  return authorService.getAll(
     (authors) => ({ type: actionTypes.GetAll, payload: { authors } }),
     (error) => ({ type: actionTypes.Error, payload: { error } })
   );
 }
 
-export default function mm(state = {}, action) {
+export default function reducer(state = {}, action) {
   switch (action.type) {
     case actionTypes.GetAll:
       return { ...state, all: action.payload.authors, error: "" };

@@ -1,36 +1,49 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import BookList from "../components/book-list/book-list";
+import NewBook from "../components/new-book/new-book";
 import Navbar from "../components/header/navbar";
 import BookDetail from "../components/book-detail/book-detail";
-import ScrollToTop from "../components/common/scroll-to-top";
+import ScrollToTop from "../utils/scroll-to-top";
+import SignIn from "../components/registration/sign-in";
+import SignUP from "../components/registration/sign-up";
+import { setCurrentUserInfo, removeCurrentUserInfo } from "../store/models/authentication";
 
-const MainRoute = () => (
-  <React.Fragment>
-    <Router>
-      <ScrollToTop />
-      <Navbar></Navbar>
-      {/* className='content-container' */}
-      <div>
-        <Switch>
-          <Route path="/home" component={BookList} />
-          <Route path="/book/:id" component={BookDetail} />
-          <Route
-            path="/hi"
-            component={() => {
-              return <div>hi</div>;
-            }}
-          />
-          <Redirect path="/" to="/home" />
-        </Switch>
-      </div>
-    </Router>
-  </React.Fragment>
-);
+class MainRoute extends React.Component {
+  componentWillMount() {
+    this.props.setUserInfo();
+  }
 
-export default MainRoute;
+  handleSignOut = () => {
+    this.props.removeUserInfo();
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <Router>
+          <ScrollToTop />
+          <Navbar onSignOut={this.handleSignOut}></Navbar>
+          <Switch>
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUP} />
+            <Route path="/book/:id" component={BookDetail} />
+            <Route path="/books/new" component={NewBook} />
+            <Route path="/" component={BookList} exact />
+            <Redirect to="/" />
+          </Switch>
+        </Router>
+      </React.Fragment>
+    );
+  }
+}
+
+const mapPropsToDispatch = (dispatch) => ({
+  setUserInfo: () => dispatch(setCurrentUserInfo()),
+  removeUserInfo: () => dispatch(removeCurrentUserInfo()),
+});
+
+const mapPropsToState = (state) => ({ userInfo: state.authentication.user });
+
+export default connect(mapPropsToState, mapPropsToDispatch)(MainRoute);

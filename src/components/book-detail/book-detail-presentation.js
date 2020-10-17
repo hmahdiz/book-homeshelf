@@ -1,10 +1,10 @@
 import React from "react";
 import "./book-detail.css";
-import EditableInput from "../custom-elements/editable-input";
+import EditableInput from "../common/editable-input";
 import * as bookEnums from "../../models/constants/book";
-import EditableSelection from "../custom-elements/editable-selection.js";
-import NewBookForm from "../add-book/new-book-form";
-import FileUpload from "../custom-elements/file-upload";
+import EditableSelection from "../common/editable-selection.js";
+import NewBookForm from "../new-book/new-book-presentation";
+import FileUpload from "../common/file-upload";
 
 const BookDetailPresentaion = ({
   book,

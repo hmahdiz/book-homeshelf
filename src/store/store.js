@@ -1,9 +1,13 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { createStore, combineReducers } from "redux";
 import bookReducer from "./models/book";
 import authorReducer from "./models/author";
 import fileUploadReducer from "./models/file";
+import authenticationReducer from "./models/authentication";
 
-const reducers = combineReducers({ book: bookReducer, author: authorReducer, file: fileUploadReducer });
-// const middlewares = applyMiddleware(thunk);
+const reducers = combineReducers({
+  book: bookReducer,
+  author: authorReducer,
+  file: fileUploadReducer,
+  authentication: authenticationReducer,
+});
 export default createStore(reducers);
