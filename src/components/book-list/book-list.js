@@ -31,18 +31,23 @@ class BookList extends React.Component {
           <p>Some of recent new books</p>
         </div>
         <ul className="book-list-content">
-          <li className="book-item-container">
-            <img
-              className="book-item-add-img"
-              src={require("../../assets/images/add.png")}
-              onClick={() => this.handleAddingBook()}
-            />
-          </li>
+          {this.props.currentUser ? (
+            <li className="book-item-container">
+              <img
+                className="book-item-add-img"
+                src={require("../../assets/images/add.png")}
+                onClick={() => this.handleAddingBook()}
+              />
+            </li>
+          ) : (
+            ""
+          )}
           {this.props.books &&
             this.props.books.map((b) => (
               <li key={b.id}>
                 <BookItem
                   {...b}
+                  currentUser={this.props.currentUser}
                   onDelete={() => this.handleDelete(b.id)}
                   onLinkClick={(e) => this.handleLinkClicked(e, b.id)}
                 >
@@ -56,7 +61,11 @@ class BookList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ books: state.book.all, error: state.book.error });
+const mapStateToProps = (state) => ({
+  books: state.book.all,
+  error: state.book.error,
+  currentUser: state.authentication.user,
+});
 
 const mapStateToDispatch = (dispatch) => ({
   getAllBooks: async () => dispatch(await getAll()),

@@ -49,6 +49,7 @@ class BookDetail extends React.Component {
     return (
       <BookDetailPresentaion
         data={this.state}
+        currentUser={this.props.currentUser}
         onChangeField={this.handleChangeField}
         onChangeList={this.handleChangeList}
         onToggleEditMode={this.toggleEditMode}
@@ -58,7 +59,11 @@ class BookDetail extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ book: state.book.byId, authors: state.author.all });
+const mapStateToProps = (state) => ({
+  book: state.book.byId,
+  authors: state.author.all,
+  currentUser: state.authentication.user,
+});
 
 const mapStateToDispatch = (dispatch) => ({
   getById: async (id) => dispatch(await getById(id)),

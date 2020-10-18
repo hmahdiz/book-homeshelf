@@ -7,7 +7,7 @@ import Image from "../common/image";
 import * as bookEnums from "../../models/constants/book";
 import "./book-detail.css";
 
-const BookDetailPresentaion = ({ data, onChangeField, onChangeList, onToggleEditMode, onSaveClick }) => {
+const BookDetailPresentaion = ({ data, currentUser, onChangeField, onChangeList, onToggleEditMode, onSaveClick }) => {
   const { book, allAuthors, isEditMode } = data;
   return (
     <div className="book-detail-container">
@@ -35,19 +35,12 @@ const BookDetailPresentaion = ({ data, onChangeField, onChangeList, onToggleEdit
                 <div className="book-detail-info">
                   <div className="book-detail-price">{book.price}$</div>
                   <div className="book-detail-price">{book.publishedDate}</div>
-                  {isEditMode ? (
-                    <React.Fragment>
-                      <button className="button button-transparent-dark" onClick={onSaveClick}>
-                        Save
-                      </button>
-                      <button className="button button-transparent-dark" onClick={() => onToggleEditMode(false)}>
-                        Cancel
-                      </button>
-                    </React.Fragment>
-                  ) : (
+                  {currentUser ? (
                     <button className="button button-transparent-white" onClick={() => onToggleEditMode(true)}>
                       Edit
                     </button>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>

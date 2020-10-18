@@ -9,6 +9,7 @@ import ScrollToTop from "../utils/scroll-to-top";
 import SignIn from "../components/registration/sign-in";
 import SignUP from "../components/registration/sign-up";
 import { setCurrentUserInfo, removeCurrentUserInfo } from "../store/models/authentication";
+import ProtectedRoute from "./protected-route";
 
 class MainRoute extends React.Component {
   componentWillMount() {
@@ -29,7 +30,7 @@ class MainRoute extends React.Component {
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUP} />
             <Route path="/book/:id" component={BookDetail} />
-            <Route path="/books/new" component={NewBook} />
+            <ProtectedRoute path="/books/new" component={NewBook} />
             <Route path="/" component={BookList} exact />
             <Redirect to="/" />
           </Switch>

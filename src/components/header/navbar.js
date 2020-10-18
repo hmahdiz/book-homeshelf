@@ -16,8 +16,8 @@ const Navbar = ({ user, onSignOut }) => (
           {user && user.username ? (
             <React.Fragment>
               <li className="nav-item nav-link">{user.username}</li>
-              <li className="nav-item nav-link" onClick={onSignOut}>
-                Sign Out
+              <li className="nav-item " onClick={onSignOut}>
+                <Link className="nav-link">Sign Out</Link>
               </li>
             </React.Fragment>
           ) : (

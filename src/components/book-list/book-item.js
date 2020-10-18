@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookItem = ({ name, bookAuthors, onDelete, onLinkClick, frontPageImage }) => {
+const BookItem = ({ name, bookAuthors, currentUser, onDelete, onLinkClick, frontPageImage }) => {
   const imageDataSource = frontPageImage
     ? "data:image/jpg;base64," + frontPageImage.data
     : require("../../assets/images/book.jpg");
@@ -21,9 +21,13 @@ const BookItem = ({ name, bookAuthors, onDelete, onLinkClick, frontPageImage }) 
                 </div>
               ))}
           </div>
-          <button className="button-transparent-white" name="delete-button" onClick={onDelete}>
-            Delete
-          </button>
+          {currentUser ? (
+            <button className="button-transparent-white" name="delete-button" onClick={onDelete}>
+              Delete
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
