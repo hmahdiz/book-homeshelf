@@ -11,12 +11,47 @@
     z-index: -1;
 }
 
+.book-detail-title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-detail-title-bar {
+    color: #b2d237;
+    font-family: proxima_nova_rgbold;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.book-detail-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .book-detail-section {
-    height: auto;
-    background-color: rgb(0 0 0 / 86%);
+    background-color: rgb(0 0 0 / 87%);
     color: #fff;
     display: flex;
     padding: 30px;
+    height: 300px;
+}
+
+.book-detail-edit-mode {
+    height: 100%;
+}
+
+.book-section-light {
+    background-color: #fff;
+    color: #000;
+}
+
+.book-section-dark {
+    background-color: #000000e6;
+    color: #fff;
 }
 
 .book-detail-background-dark {
@@ -35,7 +70,6 @@
 
 .third-section {
     flex-flow: column;
-    background-color: #87cb3ac4 !important;
 }
 
 .book-detail-img {
@@ -99,13 +133,27 @@
 
 .book-detail-selection {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
 }
 
-.book-detail-overview-title {
+.book-detail-item {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 6px;
+}
+
+.book-detail-item-label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.book-detail-section-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 25px;
+    border-bottom: 1px solid #e2e2e2;
+    padding-bottom: 6px;
+    text-transform: uppercase;
 }
 
 .book-detail-overview-text {

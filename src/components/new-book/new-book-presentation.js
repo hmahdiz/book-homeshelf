@@ -4,15 +4,8 @@ import BookForm from "./book-form";
 import FileUpload from "../common/file-upload";
 import "./new-book.css";
 
-const NewBookPresentaion = ({
-  book,
-  allAuthors,
-  onChangeField,
-  onChangeList,
-  onCancelClick,
-  onSaveClick,
-  onUploadFile,
-}) => {
+const NewBookPresentaion = ({ data, onChangeField, onChangeList, onCancelClick, onSaveClick, onUploadFile }) => {
+  const { book } = data;
   return (
     <div className="new-book-container">
       <div className="new-book-title-container">
@@ -31,8 +24,8 @@ const NewBookPresentaion = ({
         </div>
       </div>
       <form>
-        {book.id ? (
-          <BookForm data={this.state} onChangeField={onChangeField} onChangeList={onChangeList} />
+        {!book.id ? (
+          <BookForm data={data} onChangeField={onChangeField} onChangeList={onChangeList} />
         ) : (
           <React.Fragment>
             <div>

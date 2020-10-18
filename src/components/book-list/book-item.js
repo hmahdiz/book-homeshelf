@@ -13,12 +13,14 @@ const BookItem = ({ name, bookAuthors, onDelete, onLinkClick, frontPageImage }) 
           <div className="book-item-title" title={name}>
             {name}
           </div>
-          {bookAuthors &&
-            bookAuthors.map((ba) => (
-              <div key={ba.id} className="book-item-author">
-                {`${ba.author.firstName} ${ba.author.lastName}`}
-              </div>
-            ))}
+          <div className="book-item-author-list">
+            {bookAuthors &&
+              bookAuthors.map((ba) => (
+                <div key={ba.id} className="book-item-author">
+                  {`${ba.author.firstName} ${ba.author.lastName}`}
+                </div>
+              ))}
+          </div>
           <button className="button-transparent-white" name="delete-button" onClick={onDelete}>
             Delete
           </button>

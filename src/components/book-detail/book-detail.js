@@ -17,10 +17,8 @@ class BookDetail extends React.Component {
 
   async componentWillMount() {
     await this.props.getAuthors();
-    this.setState({ allAuthors: this.props.authors });
-
     await this.props.getById(this.props.match.params.id);
-    this.setState({ book: { ...this.props.book } });
+    this.setState({ book: { ...this.props.book }, allAuthors: this.props.authors });
   }
 
   toggleEditMode = (editMode) => {

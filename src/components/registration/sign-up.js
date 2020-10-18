@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import EditableInput from "../common/editable-input";
+import EditableField from "../common/editable-field";
 import { signUp } from "../../store/models/authentication";
 import "./registration.css";
 
@@ -25,10 +25,10 @@ class SignUP extends React.Component {
     return (
       <div className="registration-background">
         <form>
-          <EditableInput label="First Name" value={firstName} name="firstName" onChange={this.handleInputChange} />
-          <EditableInput label="Last Name" value={lastName} name="lastName" onChange={this.handleInputChange} />
-          <EditableInput label="Username" value={userName} name="userName" onChange={this.handleInputChange} />
-          <EditableInput
+          <EditableField label="First Name" value={firstName} name="firstName" onChange={this.handleInputChange} />
+          <EditableField label="Last Name" value={lastName} name="lastName" onChange={this.handleInputChange} />
+          <EditableField label="Username" value={userName} name="userName" onChange={this.handleInputChange} />
+          <EditableField
             label="Password"
             type="password"
             value={password}

@@ -1,25 +1,18 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-const EditableField = ({ name, value, label, type, isEditMode, className, children, onChange }) => {
+const EditableField = ({ name, value, label, type, className, children, onChange }) => {
   return (
     <div className={"field " + className}>
       <label>{label} </label>
-      {isEditMode ? (
-        <div className="input">
-          <input type={type} value={value} name={name} onChange={onChange} />
-        </div>
-      ) : (
-        <span>
-          {value} {children}
-        </span>
-      )}
+      <div className="input">
+        <input type={type} value={value} name={name} onChange={onChange} />
+      </div>
     </div>
   );
 };
 
 EditableField.defaultProps = {
-  isEditMode: true,
   type: "text",
 };
 
@@ -28,7 +21,6 @@ EditableField.propTypes = {
   value: PropTypes.any,
   label: PropTypes.string,
   type: PropTypes.string.isRequired,
-  isEitMode: PropTypes.bool,
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };

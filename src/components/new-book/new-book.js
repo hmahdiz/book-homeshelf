@@ -75,7 +75,7 @@ class NewBook extends React.Component {
   render() {
     return (
       <NewBookPresentation
-        {...this.state}
+        data={this.state}
         onChangeField={this.handleChangeField}
         onChangeList={this.handleChangeList}
         onUploadFile={(e, file) => this.handleUploadFile(e, file)}

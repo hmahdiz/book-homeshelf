@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/models/authentication";
-import EditableInput from "../common/editable-input";
+import EditableField from "../common/editable-field";
 import "./registration.css";
 
 class SingIn extends React.Component {
@@ -30,8 +30,8 @@ class SingIn extends React.Component {
     return (
       <div className="registration-background">
         <form>
-          <EditableInput label="Username" value={userName} name="userName" onChange={this.handleInputChange} />
-          <EditableInput
+          <EditableField label="Username" value={userName} name="userName" onChange={this.handleInputChange} />
+          <EditableField
             type="password"
             label="Password"
             value={password}

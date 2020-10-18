@@ -26,12 +26,12 @@ class FileUpload extends React.Component {
   render() {
     const { name } = this.props;
     return (
-      <React.Fragment>
+      <div>
         <input type="file" className="file" name={name} onChange={this.handleSelectFile} />
         <button onClick={this.handleUploadFile} className="file-upload-button">
           Upload
         </button>
-      </React.Fragment>
+      </div>
     );
   }
 }

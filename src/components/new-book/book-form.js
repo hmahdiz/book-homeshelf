@@ -1,7 +1,7 @@
 import React from "react";
-import EditableField from "../common/editable-input";
+import EditableField from "../common/editable-field";
 import EditableSelection from "../common/editable-selection";
-import SelectionList from "../common/selection-list";
+import EditableSelectionList from "../common/editable-selection-list";
 import * as bookEnums from "../../models/constants/book";
 
 const BookForm = ({ data, onChangeField, onChangeList }) => {
@@ -46,12 +46,13 @@ const BookForm = ({ data, onChangeField, onChangeList }) => {
       </fieldset>
       <fieldset>
         <div className="input-half field">
-          <label>Author(s)* </label>
           <div className="input">
-            <SelectionList
+            <EditableSelection
+              label="Author(s)*"
               className="multi-selection"
               options={allAuthors}
               selectedOptions={authors}
+              multiple={true}
               fieldValue="id"
               fieldTextes={["firstName", "lastName"]}
               onChange={onChangeList}

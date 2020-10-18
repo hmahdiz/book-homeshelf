@@ -1,4 +1,3 @@
-
 .book-list-container {
     display: flex;
     flex-flow: column;
@@ -51,6 +50,14 @@
     height: 100%;
 }
 
+.book-item-detail {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 230px;
+}
+
 .book-item-img {
     width: 100%;
     height: 100%;
@@ -90,10 +97,16 @@
     margin-bottom: 5px;
 }
 
+.book-item-author-list {
+    display: flex;
+    flex-flow: column;
+    max-height: 140px;
+    overflow: hidden;
+}
+
 .book-item-author {
     width: 100%;
     height: 24px;
     font-size: 15px;
     overflow: hidden;
-    margin-bottom: 75px;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectionObject = ({ name, options, selectedOption, onChange, defaultOption }) => {
+const EditableSelectionObject = ({ name, options, selectedOption, onChange, defaultOption }) => {
   return (
     <React.Fragment>
       <select value={selectedOption} onChange={onChange} name={name}>
@@ -17,4 +17,4 @@ const SelectionObject = ({ name, options, selectedOption, onChange, defaultOptio
   );
 };
 
-export default SelectionObject;
+export default EditableSelectionObject;
