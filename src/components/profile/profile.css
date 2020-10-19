@@ -1,0 +1,8 @@
+.profile-navbar {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #676363;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px;
+}

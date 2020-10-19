@@ -1,5 +1,5 @@
 a {
-    color: #fff !important;
+    /* color: #fff !important; */
     text-decoration: none;
 }
 
@@ -38,6 +38,7 @@ a {
 .navbar-brand {
     font-size: 25px;
     margin-right: 12px;
+    color: #fff !important;
 }
 
 .navbar-collapse {
@@ -46,16 +47,3 @@ a {
     justify-content: space-between;
 }
 
-.navbar-nav {
-    display: flex;
-    flex-flow: row;
-    list-style: none;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-left: 0;
-}
-
-.nav-link {
-    padding-left: 10px;
-    padding-right: 10px;
-}
