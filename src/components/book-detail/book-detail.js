@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React from "react";
 import { getById, update } from "../../store/models/book";
 import { getAll } from "../../store/models/author";
+import { purchase } from "../../store/models/user";
 import BookDetailPresentaion from "./book-detail-presentation";
 
 class BookDetail extends React.Component {
@@ -45,6 +46,10 @@ class BookDetail extends React.Component {
     this.setState({ isEditMode: false, book: { ...this.props.book } });
   };
 
+  handlePurchase = async () => {
+    await this.props.purchase(this.state.book.id, this.props.currentUser.username);
+  };
+
   render() {
     return (
       <BookDetailPresentaion
@@ -54,6 +59,7 @@ class BookDetail extends React.Component {
         onChangeList={this.handleChangeList}
         onToggleEditMode={this.toggleEditMode}
         onSaveClick={this.handleSave}
+        onPurchaseClick={this.handlePurchase}
       ></BookDetailPresentaion>
     );
   }
@@ -67,8 +73,9 @@ const mapStateToProps = (state) => ({
 
 const mapStateToDispatch = (dispatch) => ({
   getById: async (id) => dispatch(await getById(id)),
-  update: async (book) => dispatch(await update(book)),
   getAuthors: async () => dispatch(await getAll()),
+  update: async (book) => dispatch(await update(book)),
+  purchase: async (bookId, username) => dispatch(await purchase(bookId, username)),
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(BookDetail);

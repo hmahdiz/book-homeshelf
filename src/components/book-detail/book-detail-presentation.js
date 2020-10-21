@@ -7,7 +7,15 @@ import Image from "../common/image";
 import * as bookEnums from "../../models/constants/book";
 import "./book-detail.css";
 
-const BookDetailPresentaion = ({ data, currentUser, onChangeField, onChangeList, onToggleEditMode, onSaveClick }) => {
+const BookDetailPresentaion = ({
+  data,
+  currentUser,
+  onChangeField,
+  onChangeList,
+  onToggleEditMode,
+  onSaveClick,
+  onPurchaseClick,
+}) => {
   const { book, allAuthors, isEditMode } = data;
   return (
     <div className="book-detail-container">
@@ -36,9 +44,14 @@ const BookDetailPresentaion = ({ data, currentUser, onChangeField, onChangeList,
                   <div className="book-detail-price">{book.price}$</div>
                   <div className="book-detail-price">{book.publishedDate}</div>
                   {currentUser ? (
-                    <button className="button button-transparent-white" onClick={() => onToggleEditMode(true)}>
-                      Edit
-                    </button>
+                    <div>
+                      <button className="button button-transparent-white" onClick={() => onToggleEditMode(true)}>
+                        Edit
+                      </button>
+                      <button className="button button-transparent-white" onClick={() => onPurchaseClick()}>
+                        Purchase
+                      </button>
+                    </div>
                   ) : (
                     ""
                   )}
