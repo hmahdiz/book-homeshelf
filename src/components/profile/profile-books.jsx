@@ -8,7 +8,7 @@ const ProfileBooks = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className={props.className}>
       {props.purchases ? (
         props.purchases.map((p) => (
           <div key={p.id}>

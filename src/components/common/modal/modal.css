@@ -29,23 +29,6 @@
     /* overflow-x: auto;*/
 }
 
-.modal-title-bar {
-    color: #b2d237;
-    padding: 21px;
-    font-family: proxima_nova_rgbold;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: normal;
-    text-transform: uppercase;
-    /* margin-bottom: 27px; */
-    /* background-color: #b3d146;
-    border-radius: 7px 7px 0 0;
-    padding: 21px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #fff; */
-}
-
 .modal-content {
     padding: 0 21px 0 21px;
     height: 100%;

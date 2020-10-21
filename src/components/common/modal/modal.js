@@ -5,7 +5,7 @@ const Modal = ({ children, title, onClose, onSave, buttonName }) => {
   return (
     <div className="modal-background">
       <div className="modal-container">
-        <div className="modal-title-bar">{title}</div>
+        <div className="title-bar">{title}</div>
         <div className="modal-content">
           {children}
           <div className="modal-button-container">

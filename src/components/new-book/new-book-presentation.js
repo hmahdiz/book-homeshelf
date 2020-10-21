@@ -7,9 +7,9 @@ import "./new-book.css";
 const NewBookPresentaion = ({ data, onChangeField, onChangeList, onCancelClick, onSaveClick, onUploadFile }) => {
   const { book } = data;
   return (
-    <div className="new-book-container">
+    <div className="dark-container new-book-container">
       <div className="new-book-title-container">
-        <div className="new-book-title-bar">New Book</div>
+        <div className="title-bar">New Book</div>
         <div className="new-book-button-container">
           <button className="button button-green input" onClick={onSaveClick}>
             {book.id ? "Done" : "Save"}

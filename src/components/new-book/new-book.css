@@ -1,6 +1,5 @@
 .new-book-container {
-    background-color: #0b0b0be8;
-    padding: 6px 21px 6px 21px;
+    height: auto !important;
 }
 
 .new-book-title-container {

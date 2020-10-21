@@ -1,11 +1,32 @@
-body {
+html, body {
     font-family: proxima_nova_rgbold;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
 }
 
 .content-container {
     padding-left: 90px;
     padding-right: 90px;
     /* background-color: #bebbbb; */
+}
+
+.dark-container {
+    background-color: #0b0b0be8;
+    padding: 6px 21px 6px 21px;
+    height: calc(100% - 72px);
+}
+
+.title-bar {
+    color: #b2d237;
+    font-family: proxima_nova_rgbold;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 18px;
 }
 
 button {

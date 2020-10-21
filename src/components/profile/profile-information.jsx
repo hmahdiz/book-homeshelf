@@ -1,9 +1,7 @@
 import React from "react";
 
-class ProfileInforamtion extends React.Component {
-  render() {
-    return <div>My Information</div>;
-  }
-}
+const ProfileInforamtion = (props) => {
+  return <div className={props.className}>My Information</div>;
+};
 
 export default ProfileInforamtion;

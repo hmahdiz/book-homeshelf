@@ -1,8 +1,27 @@
 .profile-navbar {
     display: flex;
     justify-content: space-evenly;
-    background-color: #676363;
+    background-color: rgba(255, 255, 255, .18);
     color: #fff;
     font-size: 20px;
+}
+
+.profile-li {
+    flex: 1;
     padding: 15px;
+    border-bottom: 4px solid rgba(255, 255, 255, .18);
+    transition: border-bottom, background-color .4s linear;
+}
+
+.profile-selected {
+    border-bottom: 4px solid #b2d237;
+    color: #b2d237 !important;
+    background-color: #383838;
+}
+
+.profile-item-container {
+    background-color: #383838;
+    padding: 15px;
+    height: 100%;
+    color: #fff;
 }

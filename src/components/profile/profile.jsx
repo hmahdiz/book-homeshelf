@@ -15,34 +15,28 @@ const Profile = (props) => {
   }, []);
 
   return (
-    <div>
-      <h1>Profile {firstName + " " + lastName}</h1>
-      <ul className="navbar-nav profile-navbar">
-        <li>
-          <NavLink className="nav-link" to="/profile/my-books">
-            My Books
-          </NavLink>
-        </li>
-        <li>
-          {/* <NavLink className="nav-link" to="/profile/my-account"> */}
+    <div className="dark-container">
+      <div className="title-bar">Profile {firstName + " " + lastName}</div>
+      <div className="navbar-nav profile-navbar">
+        <NavLink className="nav-link profile-li" activeClassName="profile-selected" to="/profile/my-books">
+          My Books
+        </NavLink>
+        <NavLink className="nav-link profile-li" activeClassName="profile-selected" to="/profile/my-account">
           My Account (soon)
-          {/* </NavLink> */}
-        </li>
-        <li>
-          <NavLink className="nav-link" to="/profile/my-info">
-            My Information
-          </NavLink>
-        </li>
-      </ul>
+        </NavLink>
+        <NavLink className="nav-link profile-li" activeClassName="profile-selected" to="/profile/my-info">
+          My Information
+        </NavLink>
+      </div>
       <switch>
         <ProtectedRoute path={`/profile/my-books`}>
-          <ProfileBooks />
+          <ProfileBooks className="profile-item-container" />
         </ProtectedRoute>
         <ProtectedRoute path={`/profile/my-account`}>
-          <ProfileAccount />
+          <ProfileAccount className="profile-item-container" />
         </ProtectedRoute>
         <ProtectedRoute path={`/profile/my-info`}>
-          <ProfileInformation />
+          <ProfileInformation className="profile-item-container" />
         </ProtectedRoute>
       </switch>
     </div>
