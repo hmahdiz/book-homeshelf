@@ -5,6 +5,12 @@
     top: 0;
     left: 0;
     background-color: #535350f5;
+    z-index: 10;
+}
+
+.modal-title-bar {
+    padding-bottom: 11px;
+    border-bottom: 1px solid #b2d23757;
 }
 
 .modal-container {
@@ -19,14 +25,21 @@
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow-y: auto;
+    overflow-x: auto;
     background-color: rgba(0, 0, 0, .65);
     color: #fff;
     border: solid 2px #b3d146;
     border-radius: 10px;
-    /* margin-top: auto; */
-    /* margin-bottom: auto; */
-    /* overflow-y: auto; */
-    /* overflow-x: auto;*/
+    padding: 10px;
+}
+
+.modal-container-yes-no-size {
+    top: 60px;
+    height: 175px;
+    margin-top: unset;
 }
 
 .modal-content {

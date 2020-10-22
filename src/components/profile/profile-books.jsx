@@ -1,21 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getPurchases } from "../../store/models/user";
 
 const ProfileBooks = (props) => {
+  const [purchases, setPurchases] = useState([]);
+
   useEffect(() => {
-    props.getPurchases(props.currentUser.username);
+    const fetchData = async () => {
+      await props.getPurchases(props.currentUser.username);
+      setPurchases(props.purchases);
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div className={props.className}>
-      {props.purchases ? (
-        props.purchases.map((p) => (
-          <div key={p.id}>
-            <span>{p.book.name}</span>
-            <span>{p.price}</span>
-          </div>
-        ))
+      {purchases ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Book Name</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {purchases.map((p) => (
+              <tr key={p.id}>
+                <td>{p.book.name}</td>
+                <td>{p.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <div>There is no purchased book</div>
       )}

@@ -1,4 +1,5 @@
 .registration-background {
     background-color: rgb(0 0 0 / 83%);
     padding: 195px;
+    height: calc(100% - 450px);
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import BookList from "../components/book-list/book-list";
+import BookList from "../components/book-list/book-list.jsx";
 import NewBook from "../components/new-book/new-book";
 import Navbar from "../components/header/navbar";
 import BookDetail from "../components/book-detail/book-detail";
@@ -9,10 +9,8 @@ import ScrollToTop from "../utils/scroll-to-top";
 import SignIn from "../components/registration/sign-in";
 import SignUP from "../components/registration/sign-up";
 import Profile from "../components/profile/profile";
-import ProfileBooks from "../components/profile/profile-books";
 import { setCurrentUserInfo, removeCurrentUserInfo } from "../store/models/authentication";
 import ProtectedRoute from "./protected-route";
-import protectedRoute from "./protected-route";
 
 class MainRoute extends React.Component {
   componentWillMount() {

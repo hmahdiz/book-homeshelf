@@ -9,7 +9,7 @@
 .profile-li {
     flex: 1;
     padding: 15px;
-    border-bottom: 4px solid rgba(255, 255, 255, .18);
+    border-bottom: 4px solid rgb(73 73 73);
     transition: border-bottom, background-color .4s linear;
 }
 
@@ -24,4 +24,49 @@
     padding: 15px;
     height: 100%;
     color: #fff;
+}
+
+table {
+    display: block;
+}
+
+tr, td, tbody {
+    display: block;
+}
+
+thead {
+    display: none;
+}
+
+tr {
+    padding-bottom: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+td:before {
+    content: attr(data-title);
+    color: red;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    padding-right: 10px;
+    display: block;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+    font-weight: 700;
+}
+
+thead th {
+    background-color: red;
+    color: #fff;
+    border: 1px solid red;
 }

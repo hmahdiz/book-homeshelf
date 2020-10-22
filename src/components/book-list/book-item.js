@@ -1,23 +1,20 @@
 import React from "react";
+import Image from "../common/image";
 
-const BookItem = ({ name, bookAuthors, currentUser, onDelete, onLinkClick, frontPageImage }) => {
-  const imageDataSource = frontPageImage
-    ? "data:image/jpg;base64," + frontPageImage.data
-    : require("../../assets/images/book.jpg");
-
+const BookItem = ({ name, authors, currentUser, onDelete, onLinkClick, frontPageImage }) => {
   return (
     <div className="book-item-container" onClick={onLinkClick}>
-      <img className="book-item-img" src={imageDataSource} />
+      <Image className="book-item-img" source={frontPageImage.data} />
       <div className="book-item-content">
         <div className="book-item-detail">
           <div className="book-item-title" title={name}>
             {name}
           </div>
           <div className="book-item-author-list">
-            {bookAuthors &&
-              bookAuthors.map((ba) => (
+            {authors &&
+              authors.map((ba) => (
                 <div key={ba.id} className="book-item-author">
-                  {`${ba.author.firstName} ${ba.author.lastName}`}
+                  {`${ba.firstName} ${ba.lastName}`}
                 </div>
               ))}
           </div>
