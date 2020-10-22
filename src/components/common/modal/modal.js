@@ -19,10 +19,10 @@ const Modal = ({
         <div className="modal-content">
           {children}
           <div className="modal-button-container">
-            <button className="button button-green" onClick={onFirstButtonClick}>
+            <button className="button button-green input" onClick={onFirstButtonClick}>
               {buttonNameFirst}
             </button>
-            <button className="button button-transparent-white" onClick={onSecondtButtonClick}>
+            <button className="button button-transparent-white input" onClick={onSecondtButtonClick}>
               {buttonNameSecond}
             </button>
           </div>

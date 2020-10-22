@@ -5,6 +5,8 @@
 .new-book-title-container {
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #b2d23757;
+    margin-bottom: 6px;
 }
 
 .new-book-title-bar {
