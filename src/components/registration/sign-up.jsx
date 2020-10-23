@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import EditableField from "../common/editable-field";
+import EditableField from "../common/editable-field/index";
 import { signUp } from "../../store/models/authentication";
 import "./registration.css";
 

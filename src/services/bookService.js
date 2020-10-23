@@ -4,12 +4,11 @@ import httpService from "./httpService";
 const booksUrl = apiUrl + "books";
 const booksUrlWithParams = apiUrl + "books/";
 
-const getAll = async (success, error) => httpService.get(booksUrl, success, error);
-const getById = async (id, success, error) => httpService.get(booksUrlWithParams + id, success, error);
-const save = async (book, success, error) => httpService.post(booksUrl, book, success, error);
-const update = async (book, success, error) => httpService.put(booksUrl, book, success, error);
-const deleteBook = async (bookId, successFunc, errorFunc) =>
-  httpService.delete(booksUrl, { bookId }, successFunc, errorFunc);
+const getAll = async (params) => httpService.get(booksUrl, params);
+const getById = async ({ id, ...restParams }) => httpService.get(booksUrlWithParams + id, restParams);
+const save = async ({ book, ...restParams }) => httpService.post(booksUrl, book, restParams);
+const update = async ({ book, ...restParams }) => httpService.put(booksUrl, book, restParams);
+const deleteBook = async ({ bookId, ...restParams }) => httpService.delete(booksUrl, { bookId }, restParams);
 
 export default {
   getAll,

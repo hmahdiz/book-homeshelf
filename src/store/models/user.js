@@ -1,28 +1,30 @@
 import userService from "../../services/userService";
-import { func } from "prop-types";
 
 const actionTypes = {
+  Request: "REQUEST",
   GetPurchases: "GET_PURCHASES",
   Purchase: "PURCHASE",
   Error: "ERROR",
 };
 
-export async function getPurchases(username) {
-  return await userService.getPurchases(
+export const getPurchases = (username) => async (dispatch) => {
+  await userService.getPurchases({
     username,
-    (purchases) => ({ type: actionTypes.GetPurchases, payload: { purchases } }),
-    (error) => ({ type: actionTypes.Error, payload: { error } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (purchases) => dispatch({ type: actionTypes.GetPurchases, payload: { purchases } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export async function purchase(bookId, username) {
-  return await userService.purchase(
+export const purchase = (bookId, username) => async (dispatch) => {
+  await userService.purchase({
     bookId,
     username,
-    (purchaseNo) => ({ type: actionTypes.Purchase, payload: { purchaseNo } }),
-    (error) => ({ type: actionTypes.Error, payload: { error } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (purchaseNo) => dispatch({ type: actionTypes.Purchase, payload: { purchaseNo } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
 export default function reducer(state = { purchases: [], error: "" }, action) {
   switch (action.type) {

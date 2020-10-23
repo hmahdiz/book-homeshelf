@@ -4,9 +4,9 @@ import httpService from "./httpService";
 const signUpUrl = apiUrl + "signup";
 const signInUrl = apiUrl + "signin";
 
-const signUp = (data, success, error) => httpService.post(signUpUrl, data, success, error);
+const signUp = ({ data, ...restParams }) => httpService.post(signUpUrl, data, restParams);
 
-const signIn = (data, success, error) => httpService.post(signInUrl, data, success, error);
+const signIn = ({ data, ...restParams }) => httpService.post(signInUrl, data, restParams);
 
 export default {
   signUp,

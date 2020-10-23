@@ -1,9 +1,9 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import EditableSelection from "../common/editable-selection";
-import BookForm from "../new-book/book-form";
-import FileUpload from "../common/file-upload";
-import Image from "../common/image";
+import EditableSelection from "../common/editable-selection/index";
+import BookForm from "../new-book/book-form.jsx";
+import FileUpload from "../common/file-upload/index";
+import Image from "../common/image/index";
 import * as bookEnums from "../../models/constants/book";
 import "./book-detail.css";
 

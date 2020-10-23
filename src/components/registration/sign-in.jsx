@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/models/authentication";
-import EditableField from "../common/editable-field";
+import EditableField from "../common/editable-field/index";
 import "./registration.css";
 
 class SingIn extends React.Component {

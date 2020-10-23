@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getAll } from "../../store/models/author";
 import { save } from "../../store/models/book";
 import { uploadFile } from "../../store/models/file";
-import NewBookPresentation from "./new-book-presentation";
+import NewBookPresentation from "./new-book-presentation.jsx";
 
 class NewBook extends React.Component {
   constructor(props) {

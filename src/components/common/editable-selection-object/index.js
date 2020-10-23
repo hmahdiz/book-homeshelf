@@ -7,7 +7,7 @@ const EditableSelectionObject = ({ name, options, selectedOption, onChange, defa
         {defaultOption ? <option value="0">Please Select</option> : ""}
         {Object.values(options).map((o, index) => {
           return (
-            <option key={o} value={o}>
+            <option key={o} value={o} name={name}>
               {Object.keys(options)[index]}
             </option>
           );

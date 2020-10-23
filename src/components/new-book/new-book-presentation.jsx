@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import BookForm from "./book-form";
-import FileUpload from "../common/file-upload";
+import BookForm from "./book-form.jsx";
+import FileUpload from "../common/file-upload/index";
 import "./new-book.css";
 
 const NewBookPresentaion = ({ data, onChangeField, onChangeList, onCancelClick, onSaveClick, onUploadFile }) => {

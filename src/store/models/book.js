@@ -1,6 +1,7 @@
 import bookService from "../../services/bookService";
 
 const actionTypes = {
+  Request: "REQUEST",
   GetAllBooks: "GET_ALL_BOOKS",
   GetById: "GET_BY_ID",
   AddBook: "ADD_BOOK",
@@ -9,63 +10,71 @@ const actionTypes = {
   Error: "ERROR",
 };
 
-export async function getAll() {
-  return await bookService.getAll(
-    (books) => ({ type: actionTypes.GetAllBooks, payload: { books } }),
-    (err) => ({ type: actionTypes.Error, payload: err })
-  );
-}
+export const getAll = () => async (dispatch) => {
+  await bookService.getAll({
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (books) => dispatch({ type: actionTypes.GetAllBooks, payload: { books } }),
+    errorFunc: (err) => dispatch({ type: actionTypes.Error, payload: err }),
+  });
+};
 
-export async function getById(id) {
-  return await bookService.getById(
+export const getById = (id) => async (dispatch) => {
+  await bookService.getById({
     id,
-    (book) => ({ type: actionTypes.GetById, payload: { book } }),
-    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (book) => dispatch({ type: actionTypes.GetById, payload: { book } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export async function save(book) {
-  return await bookService.save(
+export const save = (book) => async (dispatch) => {
+  await bookService.save({
     book,
-    (savedBook) => ({ type: actionTypes.AddBook, payload: { savedBook } }),
-    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (savedBook) => dispatch({ type: actionTypes.AddBook, payload: { savedBook } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export async function update(book) {
-  return await bookService.update(
+export const update = (book) => async (dispatch) => {
+  await bookService.update({
     book,
-    (book) => ({ type: actionTypes.GetById, payload: { book } }),
-    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (book) => ({ type: actionTypes.GetById, payload: { book } }),
+    errorFunc: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export async function deleteBook(bookId) {
-  return await bookService.delete(
+export const deleteBook = (bookId) => async (dispatch) => {
+  await bookService.delete({
     bookId,
-    () => ({ type: actionTypes.DeleteBook, payload: { bookId } }),
-    (error) => ({ type: actionTypes.Error, payload: { error: error.message } })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (book) => ({ type: actionTypes.DeleteBook, payload: { bookId } }),
+    errorFunc: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export default function reducer(state = { all: [] }, action) {
+export default function reducer(state = { all: [], error: "", loading: false }, action) {
   switch (action.type) {
+    case actionTypes.Request:
+      return { ...state, error: "", loading: true };
     case actionTypes.GetAllBooks:
-      return { ...state, all: [...action.payload.books], error: "" };
+      return { ...state, all: [...action.payload.books], error: "", loading: false };
     case actionTypes.AddBook:
       return {
         ...state,
         all: [...state.all, action.payload.savedBook],
         byId: { ...action.payload.savedBook },
         error: "",
+        loading: false,
       };
     case actionTypes.GetById:
-      return { ...state, byId: { ...action.payload.book } };
+      return { ...state, byId: { ...action.payload.book }, error: "", loading: false };
     case actionTypes.DeleteBook:
       const all = state.all.filter((b) => b.id !== action.payload.bookId);
-      return { ...state, all };
+      return { ...state, allerror: "", loading: false };
     case actionTypes.Error:
-      return { ...state, error: action.payload.error };
+      return { ...state, error: action.payload.error, loading: false };
     default:
       return state;
   }

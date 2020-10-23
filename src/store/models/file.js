@@ -1,25 +1,27 @@
 import fileService from "../../services/fileService";
 
 const actionTypes = {
+  Request: "REQUEST",
   UploadFile: "UPLOAD_FILE",
   Error: "ERROR",
 };
 
-export async function uploadFile(id, file) {
-  return await fileService.uploadFrontImageBook(
+export const uploadFile = (id, file) => async (dispatch) => {
+  await fileService.uploadFrontImageBook({
     id,
     file,
-    () => ({ type: actionTypes.UploadFile }),
-    (err) => ({ type: actionTypes.Error, error: err })
-  );
-}
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: () => dispatch({ type: actionTypes.UploadFile }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error } }),
+  });
+};
 
 export default function reducer(state = {}, action) {
   switch (action.actionType) {
     case actionTypes.UploadFile:
       return { error: "" };
     case actionTypes.Error:
-      return { error: action.error };
+      return { error: action.payload.error };
     default:
       return state;
   }

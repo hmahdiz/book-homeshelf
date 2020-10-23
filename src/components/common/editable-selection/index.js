@@ -1,9 +1,9 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import EditableSelectionObject from "./editable-selection-object";
-import EditableSelectionList from "./editable-selection-list";
+import EditableSelectionObject from "../editable-selection-object/index";
+import EditableSelectionList from "../editable-selection-list/index";
 
-const EditableSelection = ({ isEditMode, name, label, children, ...props }) => {
+const EditableSelection = ({ isEditMode, label, children, ...props }) => {
   const { options, selectedOption, selectedOptions, fieldTextes, fieldValue } = props;
   return (
     <div>

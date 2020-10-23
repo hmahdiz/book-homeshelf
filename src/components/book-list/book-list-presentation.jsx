@@ -1,5 +1,6 @@
 import React from "react";
-import BookItem from "./book-item";
+import BookItem from "./book-item.jsx";
+// import { ReactComponent as YourSvg } from "./check-icon.svg";
 
 const BookListPresentation = ({ books, currentUser, onAddClick, onDeleteClick, onDetailClick }) => {
   return (
@@ -10,7 +11,8 @@ const BookListPresentation = ({ books, currentUser, onAddClick, onDeleteClick, o
       </div>
       <ul className="book-list-content">
         {currentUser ? (
-          <li className="book-item-container">
+          <li className="book-item-container ">
+            {/* <YourSvg></YourSvg> */}
             <img
               className="book-item-add-img"
               src={require("../../assets/images/add.png")}

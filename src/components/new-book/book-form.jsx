@@ -1,7 +1,6 @@
 import React from "react";
-import EditableField from "../common/editable-field";
-import EditableSelection from "../common/editable-selection";
-import EditableSelectionList from "../common/editable-selection-list";
+import EditableField from "../common/editable-field/index";
+import EditableSelection from "../common/editable-selection/index";
 import * as bookEnums from "../../models/constants/book";
 
 const BookForm = ({ data, onChangeField, onChangeList }) => {

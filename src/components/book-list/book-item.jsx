@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "../common/image";
+import Image from "../common/image/index";
 
 const BookItem = ({ name, authors, currentUser, onDelete, onLinkClick, frontPageImage }) => {
   return (

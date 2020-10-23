@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import bookReducer from "./models/book";
 import authorReducer from "./models/author";
 import fileUploadReducer from "./models/file";
@@ -13,4 +14,4 @@ const reducers = combineReducers({
   user: userReducer,
 });
 
-export default createStore(reducers);
+export default createStore(reducers, applyMiddleware(thunk));

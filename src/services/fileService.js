@@ -3,8 +3,8 @@ import httpService from "./httpService";
 
 const frontImageBookUrl = apiUrl + "uploadfile/frontImageBook/";
 
-const uploadFrontImageBook = (id, data, success, error) =>
-  httpService.post(frontImageBookUrl + id, data, success, error);
+const uploadFrontImageBook = ({ id, data, ...restParams }) =>
+  httpService.post(frontImageBookUrl + id, data, restParams);
 
 export default {
   uploadFrontImageBook,

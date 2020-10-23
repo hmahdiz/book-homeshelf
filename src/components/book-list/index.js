@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import BookListPresentation from "./book-list-presentation";
-import Modal from "../common/modal/modal";
+import BookListPresentation from "./book-list-presentation.jsx";
+import Modal from "../common/modal";
 import { getAll, deleteBook } from "../../store/models/book";
 import "./book-list.css";
 
@@ -16,7 +16,7 @@ class BookList extends React.Component {
   }
 
   async componentWillMount() {
-    await this.props.getAllBooks();
+    await this.props.getAll();
   }
 
   handleAdd = () => {
@@ -39,6 +39,7 @@ class BookList extends React.Component {
   };
 
   render() {
+    console.log(this.props.loading);
     return (
       <React.Fragment>
         <BookListPresentation
@@ -71,11 +72,7 @@ const mapStateToProps = (state) => ({
   books: state.book.all,
   error: state.book.error,
   currentUser: state.authentication.user,
+  loading: state.book.loading,
 });
 
-const mapStateToDispatch = (dispatch) => ({
-  getAllBooks: async () => dispatch(await getAll()),
-  delete: async (bookId) => dispatch(await deleteBook(bookId)),
-});
-
-export default connect(mapStateToProps, mapStateToDispatch)(BookList);
+export default connect(mapStateToProps, { getAll, deleteBook })(BookList);

@@ -1,23 +1,18 @@
 import axios from "axios";
 
-const get = async (url, successFunc, errorFunc) => templateHttpCall(() => axios.get(url), successFunc, errorFunc);
+const get = async (url, restParams) => templateHttpCall({ method: "get", url }, restParams);
+const post = async (url, data, restParams) => templateHttpCall({ method: "post", url, data }, restParams);
+const put = async (url, data, restParams) => templateHttpCall({ method: "put", url, data }, restParams);
+const httpDelete = async (url, data, restParams) => templateHttpCall({ method: "delete", url, data }, restParams);
 
-const post = async (url, data, successFunc, errorFunc) =>
-  templateHttpCall(() => axios.post(url, data), successFunc, errorFunc);
-
-const put = async (url, data, successFunc, errorFunc) =>
-  templateHttpCall(() => axios({ method: "put", url, data }), successFunc, errorFunc);
-
-const httpDelete = async (url, data, successFunc, errorFunc) =>
-  templateHttpCall(() => axios({ method: "delete", url, data }), successFunc, errorFunc);
-
-async function templateHttpCall(apiCallFunc, successFunc, errorFunc) {
+async function templateHttpCall(paramsOption, { requestFunc, successFunc, errorFunc }) {
   try {
-    const result = await apiCallFunc();
-    return successFunc(result.data);
+    requestFunc && requestFunc();
+    const result = await axios(paramsOption);
+    successFunc && successFunc(result.data);
   } catch (err) {
     console.error("(home-bookshelf) An error has occured: ", err);
-    return errorFunc(err);
+    errorFunc && errorFunc(err);
   }
 }
 

@@ -2,31 +2,34 @@ import localStorage from "../../utils/local-storage";
 import authenticationService from "../../services/authenticationService";
 
 const actionTypes = {
+  Request: "REQUEST",
   SetUserInfo: "SET_USER_INFO",
   Error: "ERROR",
 };
 
-export async function signUp(data) {
-  return await authenticationService.signUp(
+export const signUp = (data) => async (dispatch) => {
+  await authenticationService.signUp({
     data,
-    (savedUser) => {
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (savedUser) => {
       localStorage.setUserItem(savedUser);
-      return { type: actionTypes.SetUserInfo, payload: savedUser };
+      return dispatch({ type: actionTypes.SetUserInfo, payload: savedUser });
     },
-    (err) => ({ type: actionTypes.Error, payload: err })
-  );
-}
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
-export async function signIn(data) {
-  return await authenticationService.signIn(
+export const signIn = (data) => async (dispatch) => {
+  await authenticationService.signIn({
     data,
-    (savedUser) => {
+    requestFunc: () => dispatch({ type: actionTypes.Request }),
+    successFunc: (savedUser) => {
       localStorage.setUserItem(savedUser);
-      return { type: actionTypes.SetUserInfo, payload: savedUser };
+      return dispatch({ type: actionTypes.SetUserInfo, payload: savedUser });
     },
-    (err) => ({ type: actionTypes.Error, payload: err })
-  );
-}
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
+  });
+};
 
 export function setCurrentUserInfo() {
   const userInfo = localStorage.getUserItem();
@@ -49,7 +52,7 @@ export default function reducer(state = {}, action) {
     case actionTypes.SetUserInfo:
       return { user: action.payload, error: "" };
     case actionTypes.Error:
-      return { error: action.payload, user: null };
+      return { user: null, error: action.payload.error };
     default:
       return state;
   }

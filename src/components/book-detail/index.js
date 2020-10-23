@@ -3,7 +3,7 @@ import React from "react";
 import { getById, update } from "../../store/models/book";
 import { getAll } from "../../store/models/author";
 import { purchase } from "../../store/models/user";
-import BookDetailPresentaion from "./book-detail-presentation";
+import BookDetailPresentaion from "./book-detail-presentation.jsx";
 
 class BookDetail extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class BookDetail extends React.Component {
   }
 
   async componentWillMount() {
-    await this.props.getAuthors();
+    await this.props.getAll();
     await this.props.getById(this.props.match.params.id);
     this.setState({ book: { ...this.props.book }, allAuthors: this.props.authors });
   }
@@ -71,11 +71,11 @@ const mapStateToProps = (state) => ({
   currentUser: state.authentication.user,
 });
 
-const mapStateToDispatch = (dispatch) => ({
-  getById: async (id) => dispatch(await getById(id)),
-  getAuthors: async () => dispatch(await getAll()),
-  update: async (book) => dispatch(await update(book)),
-  purchase: async (bookId, username) => dispatch(await purchase(bookId, username)),
-});
+// const mapStateToDispatch = (dispatch) => ({
+//   getById: async (id) => dispatch(await getById(id)),
+//   getAuthors: async () => dispatch(await getAll()),
+//   update: async (book) => dispatch(await update(book)),
+//   purchase: async (bookId, username) => dispatch(await purchase(bookId, username)),
+// });
 
-export default connect(mapStateToProps, mapStateToDispatch)(BookDetail);
+export default connect(mapStateToProps, { getById, getAll, update, purchase })(BookDetail);

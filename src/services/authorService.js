@@ -3,7 +3,7 @@ import httpService from "./httpService";
 
 const authorsUrl = apiUrl + "authors";
 
-const getAll = async (success, error) => httpService.get(authorsUrl, success, error);
+const getAll = async (params) => httpService.get(authorsUrl, params);
 
 export default {
   getAll,
