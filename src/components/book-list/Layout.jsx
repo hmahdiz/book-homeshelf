@@ -1,25 +1,32 @@
 import React from "react";
 import BookItem from "./book-item.jsx";
-import Loading from "../common/loading/index";
-import Image from "../common/image/index.js";
 import Spinner from "../../assets/icons/Spinner.js";
-// import { ReactComponent as YourSvg } from "./check-icon.svg";
+import SearchBook from "../search-book/index.js";
+import Image from "../common/image/index.js";
 
-const Layout = ({ isLoading, books, currentUser, onAddClick, onDeleteClick, onDetailClick }) => {
+const Layout = ({
+  isLoading,
+  searchBook,
+  books,
+  currentUser,
+  onAddClick,
+  onDeleteClick,
+  onDetailClick,
+  onSearchClick,
+}) => {
   return (
     <div className="book-list-container">
       {isLoading ? <Spinner /> : ""}
       <div className="book-list-header">
         <h1>BOOKS</h1>
-        <p>Some of recent new books</p>
+        <SearchBook className="" name="searchBook" onSearchClick={onSearchClick}></SearchBook>
       </div>
       <ul className="book-list-content">
         {currentUser ? (
           <li className="book-item-container ">
-            {/* <YourSvg></YourSvg> */}
-            <img
+            <Image
               className="book-item-add-img"
-              src={require("../../assets/images/add.png")}
+              source={require("../../assets/images/add.png")}
               onClick={() => onAddClick()}
             />
           </li>

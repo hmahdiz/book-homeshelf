@@ -4,7 +4,8 @@ import httpService from "./httpService";
 const booksUrl = apiUrl + "books";
 const booksUrlWithParams = apiUrl + "books/";
 
-const getAll = async (params) => httpService.get(booksUrl, params);
+const getAll = async ({ searchedBook, ...restParams }) =>
+  httpService.get(`${booksUrl}${searchedBook ? "?searchedBook=" + searchedBook : ""}`, restParams);
 const getById = async ({ id, ...restParams }) => httpService.get(booksUrlWithParams + id, restParams);
 const save = async ({ book, ...restParams }) => httpService.post(booksUrl, book, restParams);
 const update = async ({ book, ...restParams }) => httpService.put(booksUrl, book, restParams);

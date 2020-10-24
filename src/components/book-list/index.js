@@ -38,6 +38,12 @@ class BookList extends React.Component {
     this.props.history.push(`/book/${id}`);
   };
 
+  handleSearchBook = async (e, searchedValue) => {
+    e.preventDefault();
+
+    await this.props.getAll(searchedValue);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -48,6 +54,7 @@ class BookList extends React.Component {
           onAddClick={this.handleAdd}
           onDeleteClick={(bookToDelete) => this.toggleDeleteModal(true, bookToDelete)}
           onDetailClick={this.handleDetailClick}
+          onSearchClick={(e, searchedValue) => this.handleSearchBook(e, searchedValue)}
         />
         {this.state.isDeleteModalOpen ? (
           <Modal

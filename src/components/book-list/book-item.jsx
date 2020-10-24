@@ -4,7 +4,7 @@ import Image from "../common/image/index";
 const BookItem = ({ name, authors, currentUser, onDelete, onLinkClick, frontPageImage }) => {
   return (
     <div className="book-item-container" onClick={onLinkClick}>
-      <Image className="book-item-img" source={frontPageImage && frontPageImage.data} />
+      <Image className="book-item-img" data={frontPageImage && frontPageImage.data} />
       <div className="book-item-content">
         <div className="book-item-detail">
           <div className="book-item-title" title={name}>

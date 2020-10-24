@@ -10,8 +10,9 @@ const actionTypes = {
   Error: "ERROR",
 };
 
-export const getAll = () => async (dispatch) => {
+export const getAll = (searchedBook) => async (dispatch) => {
   await bookService.getAll({
+    searchedBook,
     requestFunc: () => dispatch({ type: actionTypes.Request }),
     successFunc: (books) => dispatch({ type: actionTypes.GetAllBooks, payload: { books } }),
     errorFunc: (err) => dispatch({ type: actionTypes.Error, payload: err }),
