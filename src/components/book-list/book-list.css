@@ -1,3 +1,7 @@
+.test:before {
+    content: '\e900';
+}
+
 .book-list-container {
     display: flex;
     flex-flow: column;

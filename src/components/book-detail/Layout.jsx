@@ -4,10 +4,12 @@ import EditableSelection from "../common/editable-selection/index";
 import BookForm from "../new-book/book-form.jsx";
 import FileUpload from "../common/file-upload/index";
 import Image from "../common/image/index";
+import Spinner from "../../assets/icons/Spinner";
 import * as bookEnums from "../../models/constants/book";
 import "./book-detail.css";
 
-const BookDetailPresentaion = ({
+const Layout = ({
+  isLoading,
   data,
   currentUser,
   onChangeField,
@@ -19,12 +21,13 @@ const BookDetailPresentaion = ({
   const { book, allAuthors, isEditMode } = data;
   return (
     <div className="book-detail-container">
+      {isLoading ? <Spinner /> : ""}
       {book && book.id && (
         <React.Fragment>
-          <Image source={book.frontPageImage.data} className="book-detail-background-img" />
+          <Image source={book.frontPageImage && book.frontPageImage.data} className="book-detail-background-img" />
           <div className={"book-detail-section " + (isEditMode ? "book-detail-edit-mode" : "first-section")}>
             <div style={{ position: "relative", marginRight: "10px" }}>
-              <Image source={book.frontPageImage.data} className="book-detail-img" />
+              <Image source={book.frontPageImage && book.frontPageImage.data} className="book-detail-img" />
               {isEditMode ? <FileUpload name="frontPageImage" id={book.id} /> : ""}
             </div>
             {!isEditMode ? (
@@ -148,7 +151,7 @@ const BookDetailPresentaion = ({
   );
 };
 
-BookDetailPresentaion.propTypes = {
+Layout.propTypes = {
   book: PropTypes.object,
   allAuthors: PropTypes.arrayOf(PropTypes.object),
   isEditMode: PropTypes.bool,
@@ -158,4 +161,4 @@ BookDetailPresentaion.propTypes = {
   onSaveClick: PropTypes.func,
 };
 
-export default BookDetailPresentaion;
+export default Layout;

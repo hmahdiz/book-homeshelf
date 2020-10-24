@@ -3,7 +3,7 @@ import React from "react";
 import { getById, update } from "../../store/models/book";
 import { getAll } from "../../store/models/author";
 import { purchase } from "../../store/models/user";
-import BookDetailPresentaion from "./book-detail-presentation.jsx";
+import Layout from "./Layout.jsx";
 
 class BookDetail extends React.Component {
   constructor(props) {
@@ -52,7 +52,8 @@ class BookDetail extends React.Component {
 
   render() {
     return (
-      <BookDetailPresentaion
+      <Layout
+        isLoading={this.props.isLoading}
         data={this.state}
         currentUser={this.props.currentUser}
         onChangeField={this.handleChangeField}
@@ -60,7 +61,7 @@ class BookDetail extends React.Component {
         onToggleEditMode={this.toggleEditMode}
         onSaveClick={this.handleSave}
         onPurchaseClick={this.handlePurchase}
-      ></BookDetailPresentaion>
+      ></Layout>
     );
   }
 }
@@ -69,6 +70,7 @@ const mapStateToProps = (state) => ({
   book: state.book.byId,
   authors: state.author.all,
   currentUser: state.authentication.user,
+  isLoading: state.author.loading && state.book.loading,
 });
 
 // const mapStateToDispatch = (dispatch) => ({

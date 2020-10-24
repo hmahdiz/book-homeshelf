@@ -2,7 +2,7 @@ import localStorage from "../../utils/local-storage";
 import authenticationService from "../../services/authenticationService";
 
 const actionTypes = {
-  Request: "REQUEST",
+  Request: "REQUEST_AUTHENTICATION",
   SetUserInfo: "SET_USER_INFO",
   Error: "ERROR",
 };

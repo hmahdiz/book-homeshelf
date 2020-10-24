@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import BookForm from "./book-form.jsx";
 import FileUpload from "../common/file-upload/index";
+import Spinner from "../../assets/icons/Spinner.js";
 import "./new-book.css";
 
-const NewBookPresentaion = ({ data, onChangeField, onChangeList, onCancelClick, onSaveClick, onUploadFile }) => {
+const Layout = ({ isLoading, data, onChangeField, onChangeList, onCancelClick, onSaveClick, onUploadFile }) => {
   const { book } = data;
   return (
     <div className="dark-container new-book-container">
+      {isLoading ? <Spinner /> : ""}
       <div className="new-book-title-container">
         <div className="title-bar">New Book</div>
         <div className="new-book-button-container">
@@ -55,7 +57,7 @@ const NewBookPresentaion = ({ data, onChangeField, onChangeList, onCancelClick, 
   );
 };
 
-NewBookPresentaion.propTypes = {
+Layout.propTypes = {
   book: PropTypes.object.isRequired,
   allAuthors: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChangeField: PropTypes.func.isRequired,
@@ -64,4 +66,4 @@ NewBookPresentaion.propTypes = {
   onSaveClick: PropTypes.func.isRequired,
 };
 
-export default NewBookPresentaion;
+export default Layout;

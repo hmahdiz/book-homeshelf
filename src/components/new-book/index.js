@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getAll } from "../../store/models/author";
 import { save } from "../../store/models/book";
 import { uploadFile } from "../../store/models/file";
-import NewBookPresentation from "./new-book-presentation.jsx";
+import Layout from "./Layout.jsx";
 
 class NewBook extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class NewBook extends React.Component {
   }
 
   async componentWillMount() {
-    await this.props.getAuthors();
+    await this.props.getAll();
     this.setState({ ...this.state, allAuthors: [...this.props.authors] });
   }
 
@@ -45,7 +45,7 @@ class NewBook extends React.Component {
     if (!this.state.book || !this.state.book.id) {
       if (!this.isBookValid()) return;
 
-      await this.props.saveNewBook(this.state.book);
+      await this.props.save(this.state.book);
       this.setState({ ...this.state, book: { ...this.state.book, id: this.props.savedBook.id } });
     } else {
       this.props.history.push("/");
@@ -74,7 +74,8 @@ class NewBook extends React.Component {
 
   render() {
     return (
-      <NewBookPresentation
+      <Layout
+        isLoading={this.props.isLoading}
         data={this.state}
         onChangeField={this.handleChangeField}
         onChangeList={this.handleChangeList}
@@ -86,12 +87,10 @@ class NewBook extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ authors: state.author.all, savedBook: state.book.byId });
-
-const mapStateToDispatch = (dispatch) => ({
-  getAuthors: async () => dispatch(await getAll()),
-  saveNewBook: async (newBook) => dispatch(await save(newBook)),
-  uploadFile: async (e, file) => dispatch(await uploadFile(e, file)),
+const mapStateToProps = (state) => ({
+  authors: state.author.all,
+  savedBook: state.book.byId,
+  isLoading: state.author.loading || state.book.loading || state.file.loading,
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(NewBook);
+export default connect(mapStateToProps, { getAll, save, uploadFile })(NewBook);

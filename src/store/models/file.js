@@ -1,7 +1,7 @@
 import fileService from "../../services/fileService";
 
 const actionTypes = {
-  Request: "REQUEST",
+  Request: "REQUEST_FILE",
   UploadFile: "UPLOAD_FILE",
   Error: "ERROR",
 };
@@ -17,11 +17,13 @@ export const uploadFile = (id, file) => async (dispatch) => {
 };
 
 export default function reducer(state = {}, action) {
-  switch (action.actionType) {
+  switch (action.type) {
+    case actionTypes.Request:
+      return { error: "", loading: true };
     case actionTypes.UploadFile:
-      return { error: "" };
+      return { error: "", loading: false };
     case actionTypes.Error:
-      return { error: action.payload.error };
+      return { error: action.payload.error, loading: false };
     default:
       return state;
   }

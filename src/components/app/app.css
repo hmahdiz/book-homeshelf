@@ -156,3 +156,17 @@ textarea {
 .nav-link:hover {
     color: #b3d146 !important;
 }
+
+.loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+    background-color: #9a999b52;
+    z-index: 10;
+}

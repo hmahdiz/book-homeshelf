@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import BookListPresentation from "./book-list-presentation.jsx";
+import Layout from "./Layout.jsx";
 import Modal from "../common/modal";
 import { getAll, deleteBook } from "../../store/models/book";
 import "./book-list.css";
@@ -28,8 +28,8 @@ class BookList extends React.Component {
   };
 
   handleDelete = async () => {
-    await this.props.delete(this.state.bookToDelete.id);
     this.toggleDeleteModal(false);
+    await this.props.deleteBook(this.state.bookToDelete.id);
   };
 
   handleDetailClick = (e, id) => {
@@ -39,10 +39,10 @@ class BookList extends React.Component {
   };
 
   render() {
-    console.log(this.props.loading);
     return (
       <React.Fragment>
-        <BookListPresentation
+        <Layout
+          isLoading={this.props.isLoading}
           currentUser={this.props.currentUser}
           books={this.props.books}
           onAddClick={this.handleAdd}
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => ({
   books: state.book.all,
   error: state.book.error,
   currentUser: state.authentication.user,
-  loading: state.book.loading,
+  isLoading: state.book.loading,
 });
 
 export default connect(mapStateToProps, { getAll, deleteBook })(BookList);

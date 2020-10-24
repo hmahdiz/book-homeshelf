@@ -1,7 +1,7 @@
 import userService from "../../services/userService";
 
 const actionTypes = {
-  Request: "REQUEST",
+  Request: "REQUEST_USER",
   GetPurchases: "GET_PURCHASES",
   Purchase: "PURCHASE",
   Error: "ERROR",

@@ -1,7 +1,7 @@
 import bookService from "../../services/bookService";
 
 const actionTypes = {
-  Request: "REQUEST",
+  Request: "REQUEST_BOOK",
   GetAllBooks: "GET_ALL_BOOKS",
   GetById: "GET_BY_ID",
   AddBook: "ADD_BOOK",
@@ -40,8 +40,8 @@ export const update = (book) => async (dispatch) => {
   await bookService.update({
     book,
     requestFunc: () => dispatch({ type: actionTypes.Request }),
-    successFunc: (book) => ({ type: actionTypes.GetById, payload: { book } }),
-    errorFunc: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
+    successFunc: (book) => dispatch({ type: actionTypes.GetById, payload: { book } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
   });
 };
 
@@ -49,8 +49,8 @@ export const deleteBook = (bookId) => async (dispatch) => {
   await bookService.delete({
     bookId,
     requestFunc: () => dispatch({ type: actionTypes.Request }),
-    successFunc: (book) => ({ type: actionTypes.DeleteBook, payload: { bookId } }),
-    errorFunc: (error) => ({ type: actionTypes.Error, payload: { error: error.message } }),
+    successFunc: () => dispatch({ type: actionTypes.DeleteBook, payload: { bookId } }),
+    errorFunc: (error) => dispatch({ type: actionTypes.Error, payload: { error: error.message } }),
   });
 };
 
@@ -58,8 +58,10 @@ export default function reducer(state = { all: [], error: "", loading: false }, 
   switch (action.type) {
     case actionTypes.Request:
       return { ...state, error: "", loading: true };
+
     case actionTypes.GetAllBooks:
       return { ...state, all: [...action.payload.books], error: "", loading: false };
+
     case actionTypes.AddBook:
       return {
         ...state,
@@ -68,13 +70,17 @@ export default function reducer(state = { all: [], error: "", loading: false }, 
         error: "",
         loading: false,
       };
+
     case actionTypes.GetById:
       return { ...state, byId: { ...action.payload.book }, error: "", loading: false };
+
     case actionTypes.DeleteBook:
       const all = state.all.filter((b) => b.id !== action.payload.bookId);
-      return { ...state, allerror: "", loading: false };
+      return { ...state, all: [...all], error: "", loading: false };
+
     case actionTypes.Error:
       return { ...state, error: action.payload.error, loading: false };
+
     default:
       return state;
   }

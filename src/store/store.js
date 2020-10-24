@@ -8,8 +8,8 @@ import userReducer from "./models/user";
 
 const reducers = combineReducers({
   book: bookReducer,
-  author: authorReducer,
   file: fileUploadReducer,
+  author: authorReducer,
   authentication: authenticationReducer,
   user: userReducer,
 });
