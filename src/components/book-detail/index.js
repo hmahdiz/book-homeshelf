@@ -3,6 +3,7 @@ import React from "react";
 import { getById, update } from "../../store/models/book";
 import { getAll } from "../../store/models/author";
 import { purchase } from "../../store/models/user";
+import { uploadFile } from "../../store/models/file";
 import Layout from "./Layout.jsx";
 
 class BookDetail extends React.Component {
@@ -50,6 +51,11 @@ class BookDetail extends React.Component {
     await this.props.purchase(this.state.book.id, this.props.currentUser.username);
   };
 
+  handleUploadFile = async (e, file) => {
+    e.preventDefault();
+    await this.props.uploadFile(this.state.book.id, file);
+  };
+
   render() {
     return (
       <Layout
@@ -59,6 +65,7 @@ class BookDetail extends React.Component {
         onChangeField={this.handleChangeField}
         onChangeList={this.handleChangeList}
         onToggleEditMode={this.toggleEditMode}
+        onUploadFile={(e, file) => this.handleUploadFile(e, file)}
         onSaveClick={this.handleSave}
         onPurchaseClick={this.handlePurchase}
       ></Layout>
@@ -73,11 +80,4 @@ const mapStateToProps = (state) => ({
   isLoading: state.author.loading && state.book.loading,
 });
 
-// const mapStateToDispatch = (dispatch) => ({
-//   getById: async (id) => dispatch(await getById(id)),
-//   getAuthors: async () => dispatch(await getAll()),
-//   update: async (book) => dispatch(await update(book)),
-//   purchase: async (bookId, username) => dispatch(await purchase(bookId, username)),
-// });
-
-export default connect(mapStateToProps, { getById, getAll, update, purchase })(BookDetail);
+export default connect(mapStateToProps, { getById, getAll, update, purchase, uploadFile })(BookDetail);

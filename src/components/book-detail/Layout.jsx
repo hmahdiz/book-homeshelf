@@ -17,6 +17,7 @@ const Layout = ({
   onToggleEditMode,
   onSaveClick,
   onPurchaseClick,
+  onUploadFile,
 }) => {
   const { book, allAuthors, isEditMode } = data;
   return (
@@ -28,7 +29,7 @@ const Layout = ({
           <div className={"book-detail-section " + (isEditMode ? "book-detail-edit-mode" : "first-section")}>
             <div style={{ position: "relative", marginRight: "10px" }}>
               <Image source={book.frontPageImage && book.frontPageImage.data} className="book-detail-img" />
-              {isEditMode ? <FileUpload name="frontPageImage" id={book.id} /> : ""}
+              {isEditMode ? <FileUpload name="frontPageImage" id={book.id} onUploadFile={onUploadFile} /> : ""}
             </div>
             {!isEditMode ? (
               <div className="book-detail-content">
