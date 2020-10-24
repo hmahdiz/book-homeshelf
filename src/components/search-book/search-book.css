@@ -1,21 +1,31 @@
 .search-book-icon {
-    /* content: ; */
+    font-size: 46px;
+    color: #b5d541;
 }
 
-.search-book-input {
-    width: 0px;
-    height: 0px;
-    border: 1px solid #b1b1ae;
+.search-book-container {
+    width: 42px;
+    height: 46px;
     position: relative;
     left: 50%;
+    display: flex;
+    flex-flow: row;
     transition: left, width, height .3s linear;
 }
 
-.search-book-input:hover {
+.search-book-input-selected, .search-book-container:hover {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    height: 46px;
+    border: 1px solid #b1b1ae;
+    left: 0;
+}
+
+.search-book-input {
     width: 100%;
     height: 40px;
     left: 0;
     border-color: #b5d541;
     font-size: 15px;
-    /* color: #b5d541; */
 }
