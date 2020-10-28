@@ -21,7 +21,9 @@ const Navbar = ({ user, onSignOut }) => (
                 </Link>
               </li>
               <li onClick={onSignOut}>
-                <Link className="nav-link">Sign Out</Link>
+                <Link className="nav-link" to="/">
+                  Sign Out
+                </Link>
               </li>
             </React.Fragment>
           ) : (

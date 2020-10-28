@@ -3,12 +3,9 @@ import { connect } from "react-redux";
 import { getPurchases } from "../../store/models/user";
 
 const ProfileBooks = (props) => {
-  const [purchases, setPurchases] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       await props.getPurchases(props.currentUser.username);
-      setPurchases(props.purchases);
     };
 
     fetchData();
@@ -16,7 +13,7 @@ const ProfileBooks = (props) => {
 
   return (
     <div className={props.className}>
-      {purchases ? (
+      {props.purchases ? (
         <table>
           <thead>
             <tr>
@@ -25,7 +22,7 @@ const ProfileBooks = (props) => {
             </tr>
           </thead>
           <tbody>
-            {purchases.map((p) => (
+            {props.purchases.map((p) => (
               <tr key={p.id}>
                 <td>{p.book.name}</td>
                 <td>{p.price}</td>
@@ -41,8 +38,4 @@ const ProfileBooks = (props) => {
 };
 
 const mapPropsToState = (state) => ({ purchases: state.user.purchases, currentUser: state.authentication.user });
-const mapPropsToDispatch = (dispatch) => ({
-  getPurchases: async (currentUsername) => dispatch(await getPurchases(currentUsername)),
-});
-
-export default connect(mapPropsToState, mapPropsToDispatch)(ProfileBooks);
+export default connect(mapPropsToState, { getPurchases })(ProfileBooks);

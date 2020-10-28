@@ -49,6 +49,7 @@ const BookForm = ({ data, onChangeField, onChangeList }) => {
             <EditableSelection
               label="Author(s)*"
               className="multi-selection"
+              name="authors"
               options={allAuthors}
               selectedOptions={authors}
               multiple={true}

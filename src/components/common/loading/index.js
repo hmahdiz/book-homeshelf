@@ -4,8 +4,8 @@ import "./loading.css";
 const Loading = ({ isLoading }) => (
   <div>
     {isLoading ? (
-      <div class="loadingio-spinner-spinner-cu3007hpdro">
-        <div class="ldio-wybpgn9gzbc">
+      <div className="loadingio-spinner-spinner-cu3007hpdro">
+        <div className="ldio-wybpgn9gzbc">
           <div></div>
           <div></div>
           <div></div>

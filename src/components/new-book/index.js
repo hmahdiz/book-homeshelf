@@ -61,7 +61,7 @@ class NewBook extends React.Component {
     return (
       name &&
       price &&
-      price != 0 &&
+      price !== 0 &&
       publishedDate &&
       authors &&
       authors.length !== 0 &&

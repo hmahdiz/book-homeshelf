@@ -8,7 +8,7 @@ const SearchBook = ({ name, onSearchClick }) => {
   return (
     <form onSubmit={(e) => onSearchClick(e, searchValue)}>
       <div className={className} onClick={() => setShowSearchInput(true)}>
-        <i class="material-icons search-book-icon">search</i>
+        <i className="material-icons search-book-icon">search</i>
         {showSearchInput ? (
           <input
             className="search-book-input"
