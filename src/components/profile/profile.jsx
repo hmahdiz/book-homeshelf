@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, Switch } from "react-router-dom";
 import ProtectedRoute from "../../routes/protected-route";
 import ProfileBooks from "./profile-books";
 import ProfileAccount from "./profile-account";
@@ -28,7 +28,7 @@ const Profile = (props) => {
           My Information
         </NavLink>
       </div>
-      <switch>
+      <Switch>
         <ProtectedRoute path={`/profile/my-books`}>
           <ProfileBooks className="profile-item-container" />
         </ProtectedRoute>
@@ -38,7 +38,7 @@ const Profile = (props) => {
         <ProtectedRoute path={`/profile/my-info`}>
           <ProfileInformation className="profile-item-container" />
         </ProtectedRoute>
-      </switch>
+      </Switch>
     </div>
   );
 };

@@ -14,7 +14,7 @@ export const getAll = (searchedBook) => async (dispatch) => {
   await bookService.getAll({
     searchedBook,
     requestFunc: () => dispatch({ type: actionTypes.Request }),
-    successFunc: (books) => dispatch({ type: actionTypes.GetAllBooks, payload: { books } }),
+    successFunc: (result) => dispatch({ type: actionTypes.GetAllBooks, payload: { result } }),
     errorFunc: (err) => dispatch({ type: actionTypes.Error, payload: err }),
   });
 };
@@ -61,7 +61,7 @@ export default function reducer(state = { all: [], error: "", loading: false }, 
       return { ...state, error: "", loading: true };
 
     case actionTypes.GetAllBooks:
-      return { ...state, all: [...action.payload.books], error: "", loading: false };
+      return { ...state, all: [...action.payload.result.result], error: "", loading: false };
 
     case actionTypes.AddBook:
       return {
